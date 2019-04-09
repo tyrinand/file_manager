@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\folder;
+use Illuminate\Support\Str;
 
 class MyAvt extends Controller
 {
@@ -48,6 +50,13 @@ class MyAvt extends Controller
                 'path' => "public\\".$date['login'],
                 'size' => '250',
                 'use_size'=> '0'
+            ]);
+            $new_root = folder::create([
+                'user_name'=> $new_user->path, // пользовательское имя для root каталога не отобразится
+                'user_id' => $new_user->id,
+                'server_name' => $new_user->path,
+                'root' => '1',
+                'slug' => (string) Str::uuid()
             ]);
             Storage::makeDirectory($new_user->path); // создали папку 
                 // авторизируемся в сисстеме

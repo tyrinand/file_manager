@@ -19,9 +19,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Облако ИАТЭ
-                </a>
+                <!--
+                    <a class="navbar-brand" href="{{ url('/home') }}">
+                         Облако ИАТЭ
+                    </a>
+                -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -29,9 +31,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                     @auth
+                      <li class="nav-item menu-logo">
+                          <a class="nav-link" href="#"  role="button">
+                           <div class="menu-create-folder" title="Создать папку"></div>
+                          </a>
+                      </li>
+                      <li class="nav-item menu-logo">
+                        <a class="nav-link" href="#" role="button">
+                            <div class="menu-upload-files" title="Загрузить файл"></div>
+                        </a>
+                      </li>
+                      <li class="nav-item menu-logo">
+                        
+                      </li>
+                      @endauth
                     </ul>
-
+                    @yield('progress')
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
