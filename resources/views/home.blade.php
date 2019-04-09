@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -8,66 +7,39 @@
                 <div class="card-header">{{ $folder_title }}</div>
                 @if ( ($children_folder->isNotEmpty()) )
                     <table class="table table-bordered table-sm my-table">
-                    <thead>
-                    <tr>
-                    <th>
-                         Наименование
-                        <a href="{{ route('base_res_create') }}">
-                         <div class="myadd" title="Добавить"></div>
-                     </a>
-                        </th>
-                    <th> №</th>
-                     <!--<th>Описание</th>
-                     <th>Заводской номер</th>
-                        <th>Год выпуска</th>
-                        -->
-                     <th class="d-none d-lg-table-cell">Категория</th>
-                    <th>Статус</th>
-                    <th>Отдел</th>
-                    <th>Действие</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($children_folder as $res)
-                <tr>
-                    <td>{{ $res->name }}</td>
-                    <td>{{ $res->inventory_number }}</td>
-                    <!--    <td>{{ $res->descr }}</td>
-
-
-                     <td>{{ $res->factory_number }}</td>
-                     <td>{{ $res->year_of_issue }}</td>
-
-                    <td>{{ \Carbon\Carbon::parse($res->start_up_date)->format('d/m/Y') }} </td>
-                    -->
-                    <td class="d-none d-lg-table-cell">{{ $res->category }}</td>
-                    <td>{{ $res->status }}</td>
-                    <td>{{ $res->dept }}</td>
-                    <td>
-              <a href="{{ route('base_res_info',$res->id) }}">
-                <div class="myfullinfo" title="инфо"></div>
-              </a>
-              <a href="{{ route('base_res_complect',$res->id) }}">
-                <div class="myout" title="комплекция"></div>
-              </a>
-              <a href="{{ route('base_res_find',$res->id) }}">
-                <div class="myin" title="вставить"></div>
-              </a>
-              <a href="{{ route('base_res_edit',$res->id) }}">
-                <div class="mycreate" title="изменить"></div>
-              </a>
-              <a href="{{ route('base_res_sp',$res->id) }}">
-                <div class="mydel" title="списать"></div>
-              </a>
-              <a href="{{ route('base_res_transfer',$res->id) }}">
-                <div class="mytransf" title="передать"></div>
-              </a>
-
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
+                      <thead>
+                        <tr>
+                          <th>Имя</th>
+                          <th>Дата создания</th>
+                          <th>Действия</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($children_folder as $fl)
+                          <tr>
+                            <td>
+                              <a href="{{ route('folder_child',$fl->slug) }}" class="folder-link">  
+                                <div class="folder-container" >
+                                    <div class="folder" ></div>
+                                    <span class="my-min-space"></span>
+                                    {{ $fl->user_name }}
+                                </div>    
+                              </a>
+                            </td>
+                            <td>{{ \Carbon\Carbon::parse($fl->created_at)->format('d.m.Y') }} </td>
+                            <td>
+                              <form class="" action="{{ route('folder_delete',$fl->slug) }}" method="post" onsubmit="if(confirm('Удалить?')){return true}else{return false}">
+                                <input type="hidden" name="_method" value="DELETE">
+                                {{ csrf_field() }}
+                                <button type="submit" class="my-submit-btn">
+                                  <div class="icon-folder-delete" title="Удалить папку"></div>
+                                </button>
+                              </form>
+                            </td> 
+                          </tr>
+                          @endforeach
+                        </tbody>
+                    </table>
                 @else
                 <br>
                     <p class="text-center">Папка пуста</p>
@@ -91,4 +63,17 @@
     </div>
     <p class=" my_prosent_label">{{Auth::user()->use_size}}  / {{ Auth::user()->size }} Mb</p>
 </div>    
+@endsection
+
+@section('nav-link')
+<li class="nav-item menu-logo">
+  <a class="nav-link" href="{{ route('folder_create',$parent_folder) }}"  role="button">
+    <div class="menu-create-folder" title="Создать папку"></div>
+  </a>
+</li>
+<li class="nav-item menu-logo">
+  <a class="nav-link" href="#" role="button">
+    <div class="menu-upload-files" title="Загрузить файл"></div>
+  </a>
+</li>
 @endsection

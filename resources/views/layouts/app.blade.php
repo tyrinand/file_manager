@@ -32,19 +32,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                      @auth
-                      <li class="nav-item menu-logo">
-                          <a class="nav-link" href="#"  role="button">
-                           <div class="menu-create-folder" title="Создать папку"></div>
-                          </a>
-                      </li>
-                      <li class="nav-item menu-logo">
-                        <a class="nav-link" href="#" role="button">
-                            <div class="menu-upload-files" title="Загрузить файл"></div>
-                        </a>
-                      </li>
-                      <li class="nav-item menu-logo">
-                        
-                      </li>
+                      @yield('nav-link')
                       @endauth
                     </ul>
                     @yield('progress')

@@ -56,7 +56,8 @@ class MyAvt extends Controller
                 'user_id' => $new_user->id,
                 'server_name' => $new_user->path,
                 'root' => '1',
-                'slug' => (string) Str::uuid()
+                'slug' => (string) Str::uuid(),
+                'title' =>$new_user->login
             ]);
             Storage::makeDirectory($new_user->path); // создали папку 
                 // авторизируемся в сисстеме

@@ -11,7 +11,7 @@ class folder extends Model
         return 'slug';
     }
     protected $fillable = [
-        'user_name', 'user_id', 'server_name','root','parent', 'slug'
+        'user_name', 'user_id', 'server_name','root','parent', 'slug', 'title'
     ];
 
     public function user() // получение пользователя

@@ -39,11 +39,56 @@
   left: 45%;
   color:white;
 }
-
+.myspace{
+  display: inline-block;
+  width: 30px;
+}
+.folder{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/folder.svg);
+  background-size: cover;
+}
+.folder-link{
+  text-decoration: none;
+}
+.folder-container{
+  display: flex;
+  align-items: center;
+}
+.my-min-space{
+  display: inline-block;
+  width: 10px;
+}
+.icon-folder-delete{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/delete_folder.svg);
+  background-size: cover;
+}
+.my-submit-btn{
+  background-color: transparent;
+  border: 0;
+}
+.my-submit-btn:active, .my-submit-btn:focus {
+  outline: none;
+}
+.my-submit-btn::-moz-focus-inner {
+  border: 0;
+}
 
 
 @media screen and (max-width: 400px) { // мобилки
   .my_prosent_label{
     left: 39%;
+  }
+  .my-table{
+    font-size: 12px;
+  }
+  .folder{
+    width: 20px;
+    height: 20px;
   }
 }
