@@ -4,20 +4,21 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Создание папки</div>
+                <div class="card-header">Переименовать</div>
                     <div class="row justify-content-center">
                         <div class="col-8">
-                            <form  action="{{ route('folder_store') }}" method="post">
+                            <form  action="{{ route('folder_update', $folder->slug) }}" method="post">
                                 {{ csrf_field() }}
+                                @method('PATCH')
                                 <div class="form-group">
                                     <br/>
-                                    <input type="text" class="form-control" name="user_name" placeholder="Имя папки" required/>
+                                    <input type="text" class="form-control" name="user_name" placeholder="Имя папки" required value="{{$folder->user_name}}"/>
                                 </div>
-                                <input type="hidden" name="parent" value="{{ $folder->slug }}" />
+                                <input type="hidden" name="parent" value="{{ $parent_folder->slug }}" />
                                 <div class="row justify-content-center">
-                                        <button class="btn btn-primary" type="submit" name="button">Добавить</button>
+                                        <button class="btn btn-primary" type="submit" name="button">Сохранить</button>
                                         <span class="myspace"></span>
-                                        <a class="btn btn-info" href="{{ route('folder_child', $folder->slug) }}">Назад</a>
+                                        <a class="btn btn-info" href="{{ route('folder_child', $parent_folder->slug) }}">Отмена</a>
                                 </div>
                             </form>
                         </div>

@@ -20,7 +20,7 @@
                             <td>
                               <a href="{{ route('folder_child',$fl->slug) }}" class="folder-link">  
                                 <div class="folder-container" >
-                                    <div class="folder" ></div>
+                                    <div class="folder modile-icons" ></div>
                                     <span class="my-min-space"></span>
                                     {{ $fl->user_name }}
                                 </div>    
@@ -30,10 +30,13 @@
                             <td>
                               <form class="" action="{{ route('folder_delete',$fl->slug) }}" method="post" onsubmit="if(confirm('Удалить?')){return true}else{return false}">
                                 <input type="hidden" name="_method" value="DELETE">
-                                {{ csrf_field() }}
+                                  {{ csrf_field() }}
                                 <button type="submit" class="my-submit-btn">
-                                  <div class="icon-folder-delete" title="Удалить папку"></div>
+                                  <div class="icon-folder-delete modile-icons" title="Удалить папку"></div>
                                 </button>
+                                <a href="{{ route('folder_edit',$fl->slug) }}">  
+                                    <div class="folder-edit modile-icons" title="Переименовать папку"></div>  
+                                </a>
                               </form>
                             </td> 
                           </tr>
@@ -74,6 +77,22 @@
 <li class="nav-item menu-logo">
   <a class="nav-link" href="#" role="button">
     <div class="menu-upload-files" title="Загрузить файл"></div>
+  </a>
+</li>
+<li class="nav-item menu-logo">
+  <a class="nav-link"
+  @if ($parent_folder->root === 0)
+   href="{{ route('folder_parent',$parent_folder) }}" 
+  @else
+    href="{{ route('root_folder') }}"
+  @endif
+   role="button"> 
+    <div class="menu-folder-up" title="Вверх"></div>
+  </a>
+</li>
+<li class="nav-item menu-logo">
+  <a class="nav-link"  href="{{ route('root_folder') }}" role="button">
+    <div class="menu-folder-home" title="Корневой каталог"></div>
   </a>
 </li>
 @endsection

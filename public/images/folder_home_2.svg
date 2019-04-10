@@ -13,7 +13,7 @@
    viewBox="1 -39 511.9992 511"
    width="511pt"
    id="svg13"
-   sodipodi:docname="folder.svg"
+   sodipodi:docname="folder_home_2.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <metadata
      id="metadata19">
@@ -49,16 +49,16 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1013"
+     inkscape:window-width="844"
+     inkscape:window-height="680"
      id="namedview15"
      showgrid="false"
-     inkscape:zoom="0.97970959"
+     inkscape:zoom="0.4898548"
      inkscape:cx="340.66667"
      inkscape:cy="422.32352"
-     inkscape:window-x="-9"
-     inkscape:window-y="-9"
-     inkscape:window-maximized="1"
+     inkscape:window-x="858"
+     inkscape:window-y="146"
+     inkscape:window-maximized="0"
      inkscape:current-layer="surface1" />
   <g
      id="surface1">
@@ -195,5 +195,10 @@
        id="path51"
        inkscape:connector-curvature="0"
        transform="matrix(0.75146656,0,0,0.75146656,1,-39.4996)" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#083863;stroke-width:1.00195539"
+       d="M 419.06594,236.28716 290.04069,126.46737 c -5.11545,-4.42269 -12.7123,-4.42269 -17.96083,0 L 143.05854,236.28716 c -5.8043,4.97454 -6.49314,13.67904 -1.52251,19.47941 4.97456,5.8043 13.81603,6.49314 19.62033,1.51859 l 14.91582,-12.7123 v 116.17985 c 0,8.4227 6.63405,14.64186 15.05673,14.64186 h 179.85882 c 8.43051,0 15.06064,-6.35616 15.06064,-14.64186 V 244.57677 l 14.91974,12.70839 c 2.62231,2.21135 5.80429,3.31507 8.97846,3.31507 3.86301,0 7.87083,-1.6595 10.49706,-4.83366 5.11544,-5.80037 4.42268,-14.50487 -1.37769,-19.47941 z m -60.50872,111.61626 h -154.716 v -126.673 l 77.358,-66.0312 77.358,66.0312 z m 0,0"
+       id="path8-5" />
   </g>
 </svg>

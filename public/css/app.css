@@ -10664,7 +10664,7 @@ a.text-dark:focus {
   display: inline-block;
   width: 40px;
   height: 40px;
-  background-image: url(/images/add_folder.svg?04387f582ed5bda2147579c760a13021);
+  background-image: url(/images/add_folder.svg?cd8e821f91d70df8ff64c2bc63f3efae);
   background-size: cover;
 }
 
@@ -10701,7 +10701,7 @@ a.text-dark:focus {
   display: inline-block;
   width: 30px;
   height: 30px;
-  background-image: url(/images/folder.svg?c03d98d0ab2469ea4c3ffeeec436497a);
+  background-image: url(/images/folder.svg?dd1a3b04915cb2dedd290d50add0a802);
   background-size: cover;
 }
 
@@ -10723,7 +10723,7 @@ a.text-dark:focus {
   display: inline-block;
   width: 30px;
   height: 30px;
-  background-image: url(/images/delete_folder.svg?adf51f83a874b1b0054cc422f0da3d1b);
+  background-image: url(/images/delete_folder.svg?746519b4895f0a82784a4846bbd7c2eb);
   background-size: cover;
 }
 
@@ -10741,6 +10741,36 @@ a.text-dark:focus {
   border: 0;
 }
 
+.folder-edit {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/rename_folder.svg?bee7d467e84b36a6294f06f798acacdb);
+  background-size: cover;
+}
+
+.menu-folder-up {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url(/images/folder_up.svg?a0f3bffb6eacc3873ee5d19eb0ef7081);
+  background-size: cover;
+}
+
+.menu-folder-home {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url(/images/folder_home_2.svg?32dade639a7c064f130f58147ced9338);
+  background-size: cover;
+}
+
+@media screen and (max-width: 770px) {
+  .my_prosent_label {
+    left: 39%;
+  }
+}
+
 @media screen and (max-width: 400px) {
   .my_prosent_label {
     left: 39%;
@@ -10750,7 +10780,7 @@ a.text-dark:focus {
     font-size: 12px;
   }
 
-  .folder {
+  .modile-icons {
     width: 20px;
     height: 20px;
   }

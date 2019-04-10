@@ -78,8 +78,32 @@
 .my-submit-btn::-moz-focus-inner {
   border: 0;
 }
-
-
+.folder-edit{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/rename_folder.svg);
+  background-size: cover;
+}
+.menu-folder-up{
+  display: inline-block;
+  width:40px;
+  height: 40px;
+  background-image:url(../img/folder_up.svg);
+  background-size: cover;
+}
+.menu-folder-home{
+  display: inline-block;
+  width:40px;
+  height: 40px;
+  background-image:url(../img/folder_home_2.svg);
+  background-size: cover;
+}
+@media screen and (max-width: 770px) { // планшеты
+  .my_prosent_label{
+    left: 39%;
+  }
+}
 @media screen and (max-width: 400px) { // мобилки
   .my_prosent_label{
     left: 39%;
@@ -87,7 +111,7 @@
   .my-table{
     font-size: 12px;
   }
-  .folder{
+  .modile-icons{ // класс для уменьшеня размера иконок на мобильниках
     width: 20px;
     height: 20px;
   }
