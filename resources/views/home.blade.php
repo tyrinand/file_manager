@@ -75,7 +75,7 @@
   </a>
 </li>
 <li class="nav-item menu-logo">
-  <a class="nav-link" href="#" role="button">
+  <a class="nav-link" href="{{ route('file_upload',$parent_folder) }}" role="button">
     <div class="menu-upload-files" title="Загрузить файл"></div>
   </a>
 </li>

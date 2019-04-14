@@ -17,14 +17,14 @@ Route::get('/', function () {
     else
         return view('welcome');
 });
-
+//авторизация
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/login','MyAvt@login')->name('login'); //маршрут для логина
 Route::get('/login',function () {return view('welcome');})->name('login'); //маршрут для редиректа
 Route::post('/logout','MyAvt@logout')->name('logout'); //маршрут для выхода
 Route::get('/logout','MyAvt@logout')->name('logout');
-//авторизация
 
+//работа с папками
 Route::get('/folder_create/{folder}','FolderController@create')->name('folder_create'); // форма создания
 Route::post('/folder_store','FolderController@store')->name('folder_store');//сохранение папки
 Route::delete('/delfolder/{folder}','FolderController@destroy')->name('folder_delete'); // удаление
@@ -34,3 +34,6 @@ Route::patch('/folder_update/{folder}','FolderController@update')->name('folder_
 Route::get('/folder_child/{folder}','FolderController@inter_parent_out_child')->name('folder_child'); // получение потомком по родителю
 Route::get('/folder_parent/{folder}','FolderController@inter_child_out_parent')->name('folder_parent'); // получение потомком по родителю
 Route::get('/root_folder','FolderController@root_folder')->name('root_folder'); // домашний каталог
+
+// работа с файлами 
+Route::get('/file_upload/{folder}','FileController@upload')->name('file_upload'); // форма создания
