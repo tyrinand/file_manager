@@ -99,6 +99,30 @@
   background-image:url(../img/folder_home_2.svg);
   background-size: cover;
 }
+.my-file-input{
+  margin:0;
+  width:125px;
+  color: transparent;
+}
+.menu-space{
+  display: inline-block;
+  width:45px;
+  height: 40px;
+}
+.my-upload-delete{
+  display: inline-block;
+  width:  20px;
+  height: 20px;
+  background-image:url(../img/delete_upload.svg);
+  background-size: cover;
+  cursor: pointer;
+}
+.file-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 @media screen and (max-width: 770px) { // планшеты
   .my_prosent_label{
     left: 39%;
@@ -114,5 +138,11 @@
   .modile-icons{ // класс для уменьшеня размера иконок на мобильниках
     width: 20px;
     height: 20px;
+  }
+  .file-title-upload{
+    font-size: 10px;
+  }
+  .menu-space{
+    display: none;
   }
 }

@@ -4,12 +4,12 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Загрузка файла</div>
+                <div class="card-header">Загрузка файлов</div>
                     <div class="row justify-content-center">
-                        <div class="col-8">
-                            <p>{{ $folder->title }}</p> <!-- здесь лежит родительская папка -->
+                        <div class="col-10">
+                            
                            <div id="app">
-                                <example-component />
+                                <upload-file />
                            </div>
                         </div>
                     </div>
@@ -17,6 +17,7 @@
         </div>
     </div>
 </div>
+<p>{{ $folder->title }}</p> <!-- здесь лежит родительская папка -->
 @endsection
 
 @section('progress')
@@ -32,4 +33,14 @@
     </div>
     <p class=" my_prosent_label">{{Auth::user()->use_size}}  / {{ Auth::user()->size }} Mb</p>
 </div>    
+@endsection
+
+@section('nav-link')
+<li class="nav-item menu-logo">
+    <div class="menu-space"></div>
+</li>
+<li class="nav-item menu-logo">
+    <div class="menu-space" ></div>
+</li>
+
 @endsection

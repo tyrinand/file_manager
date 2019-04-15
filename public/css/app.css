@@ -10765,6 +10765,33 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.my-file-input {
+  margin: 0;
+  width: 125px;
+  color: transparent;
+}
+
+.menu-space {
+  display: inline-block;
+  width: 45px;
+  height: 40px;
+}
+
+.my-upload-delete {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url(/images/delete_upload.svg?441d8611106ab6473ed8c5487cda63ac);
+  background-size: cover;
+  cursor: pointer;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 @media screen and (max-width: 770px) {
   .my_prosent_label {
     left: 39%;
@@ -10783,6 +10810,14 @@ a.text-dark:focus {
   .modile-icons {
     width: 20px;
     height: 20px;
+  }
+
+  .file-title-upload {
+    font-size: 10px;
+  }
+
+  .menu-space {
+    display: none;
   }
 }
 

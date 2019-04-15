@@ -1771,9 +1771,119 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {
+      fileOrder: [],
+      // файлы на загрузку
+      fileFinish: [],
+      // файлы завершенные загрузку
+      fileProgress: 0,
+      fileCurrent: "",
+      // подпись текущего файла
+      totalSize: 0 // размер выбранных файлов
+
+    };
+  },
+  methods: {
+    fileInputChange: function fileInputChange() {
+      // когда пользователь выбирает файлы
+      var files = Array.from(event.target.files);
+      this.fileOrder = files.slice();
+      this.totalSize = 0; // обнуляем размер
+
+      var tempSize = 0;
+
+      for (var _i = 0, _files = files; _i < _files.length; _i++) // цикл по элементам
+      {
+        var item = _files[_i];
+        tempSize += item.size;
+      }
+
+      tempSize = (tempSize / 1024).toFixed(2);
+      this.totalSize = tempSize;
+    },
+    deleteFile: function deleteFile(index) {
+      // методу удаления из списка на отправку
+      this.fileOrder.splice(index, 1);
+      var tempSize = 0;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = this.fileOrder[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) // цикл по элементам
+        {
+          var item = _step.value;
+          tempSize += item.size;
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      tempSize = (tempSize / 1024).toFixed(2);
+      this.totalSize = tempSize;
+    },
+    formatSize: function formatSize(value) {
+      var val = (value / 1).toFixed(2).replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
   }
 });
 
@@ -36844,20 +36954,159 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _vm._v("\n        I'm an example component.\n    ")
+  return _c("div", [
+    _c("br"),
+    _vm._v(" "),
+    _vm.totalSize < 1024
+      ? _c("p", { staticClass: "text-center" }, [
+          _vm._v(
+            "Общий размер файлов: " +
+              _vm._s(_vm.formatSize(_vm.totalSize)) +
+              " Kb"
+          )
+        ])
+      : _c("p", { staticClass: "text-center" }, [
+          _vm._v(
+            "Общий размер файлов: " +
+              _vm._s(_vm.formatSize(_vm.totalSize / 1024)) +
+              " Mb"
+          )
+        ]),
+    _vm._v(" "),
+    _vm.fileProgress > 0
+      ? _c("div", { staticClass: "row justify-content-center" }, [
+          _c("hr"),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-10" }, [
+            _c(
+              "div",
+              { staticClass: "progress", staticStyle: { height: "40px" } },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "progress-bar",
+                    style: { width: _vm.fileProgress + "%" },
+                    attrs: {
+                      role: "progressbar",
+                      "aria-valuenow": "25",
+                      "aria-valuemin": "0",
+                      "aria-valuemax": "100"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.fileCurrent) +
+                        "%\n                "
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-content-around" }, [
+      _c("input", {
+        staticClass: "my-file-input",
+        attrs: { type: "file", name: "image", multiple: "" },
+        on: { change: _vm.fileInputChange }
+      }),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-primary" }, [
+        _vm._v("Загрузить все")
+      ])
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12 col-md-12 col-lg-6" }, [
+        _c("h5", { staticClass: "text-center" }, [
+          _vm._v("Файлы на отправку (" + _vm._s(_vm.fileOrder.length) + ")")
+        ]),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { staticClass: "list-group" },
+          _vm._l(_vm.fileOrder, function(file, index) {
+            return _c("li", { staticClass: "list-group-item" }, [
+              _c("div", { staticClass: "file-item" }, [
+                file.size / 1024 < 1024
+                  ? _c("span", { staticClass: "file-title-upload" }, [
+                      _vm._v(
+                        _vm._s(file.name) +
+                          ":" +
+                          _vm._s((file.size / 1024).toFixed(2)) +
+                          "Kb"
+                      )
+                    ])
+                  : _c("span", { staticClass: "file-title-upload" }, [
+                      _vm._v(
+                        _vm._s(file.name) +
+                          ":" +
+                          _vm._s((file.size / 1048576).toFixed(2)) +
+                          "Mb"
+                      )
+                    ]),
+                _vm._v(" "),
+                _c("div", {
+                  staticClass: "my-upload-delete",
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteFile(index)
+                    }
+                  }
+                })
+              ])
+            ])
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12 col-md-12 col-lg-6" }, [
+        _c("h5", { staticClass: "text-center" }, [
+          _vm._v("Загруженные файлы (" + _vm._s(_vm.fileFinish.length) + ")")
+        ]),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { staticClass: "list-group" },
+          _vm._l(_vm.fileFinish, function(file) {
+            return _c("li", { staticClass: "list-group-item" }, [
+              file.size / 1024 < 1024
+                ? _c("span", { staticClass: "file-title-upload" }, [
+                    _vm._v(
+                      _vm._s(file.name) +
+                        ":" +
+                        _vm._s((file.size / 1024).toFixed(2)) +
+                        "Kb"
+                    )
+                  ])
+                : _c("span", { staticClass: "file-title-upload" }, [
+                    _vm._v(
+                      _vm._s(file.name) +
+                        ":" +
+                        _vm._s((file.size / 1048576).toFixed(2)) +
+                        "Mb"
+                    )
+                  ])
+            ])
+          }),
+          0
+        )
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -49025,7 +49274,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+Vue.component('upload-file', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
