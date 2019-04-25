@@ -7,9 +7,8 @@
                 <div class="card-header">Загрузка файлов</div>
                     <div class="row justify-content-center">
                         <div class="col-10">
-                            
                            <div id="app">
-                                <upload-file />
+                                <upload-file :folder="{{ $folder->id}}" > </upload-file>
                            </div>
                         </div>
                     </div>
@@ -17,7 +16,6 @@
         </div>
     </div>
 </div>
-<p>{{ $folder->title }}</p> <!-- здесь лежит родительская папка -->
 @endsection
 
 @section('progress')

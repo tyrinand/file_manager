@@ -20,7 +20,7 @@
         <input type="file" class="my-file-input" name="image" 
         multiple="" @change="fileInputChange" /> 
         
-        <button class="btn btn-primary">Загрузить все</button>
+        <button class="btn btn-primary" @click="uploadfiles">Загрузить все</button>
     </div>
     <hr>
     <br>
@@ -62,6 +62,7 @@
                totalSize: 0, // размер выбранных файлов
            }
        },
+       props:['folder'],
        methods: {
             fileInputChange(){ // когда пользователь выбирает файлы
                let files = Array.from(event.target.files);
@@ -88,6 +89,33 @@
             formatSize(value) {
                 let val = (value/1).toFixed(2).replace('.', ',')
                 return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            },
+            async uploadfiles(){
+                let files = this.fileOrder.slice();
+                for(let item of files){
+                    await this.uploadFile(item);
+                }
+            },
+            async uploadFile(item)
+            {
+                let form = new FormData(); // создаем форму на js
+                form.append('image',item); // поле с именем image
+
+                await axios.post('/file_upload_save',form,{
+                    onUploadProgress: (itemUpload) =>{
+                        this.fileProgress = Math.round( (itemUpload.loaded/itemUpload.total) * 100);
+                        this.fileCurrent = item.name + ' ' + this.fileProgress;
+                    }
+                })
+                .then(response =>{
+                    this.fileProgress = 0; 
+                    this.fileCurrent = '';
+                    this.fileFinish.push(item);
+                    this.fileOrder.splice(item, 1);
+                })
+                .catch(error =>{
+                    console.log(error);
+                })
             }
        }
     }

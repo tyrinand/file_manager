@@ -11,8 +11,12 @@ class FileController extends Controller
         $this->middleware('auth');
     }
 
-    public function upload(folder $folder) // форма для загрузки
+    public function uploadform(folder $folder) // форма для загрузки
     {  
         return view('file.upload',compact('folder')); 
+    }
+    public function upload(Request $request) //  сохранение
+    {  
+        $request->file('image')->store('test','public');
     }
 }
