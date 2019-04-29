@@ -1991,7 +1991,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(item) {
         var _this = this;
 
-        var form;
+        var form, idFolder;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -2000,7 +2000,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 form.append('image', item); // поле с именем image
 
-                _context2.next = 4;
+                idFolder = this.folder; //id_родительской папки
+
+                form.append('folder', idFolder); // прикрепляем поле с id 
+
+                _context2.next = 6;
                 return axios.post('/file_upload_save', form, {
                   onUploadProgress: function onUploadProgress(itemUpload) {
                     _this.fileProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
@@ -2013,16 +2017,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.fileFinish.push(item);
 
                   _this.fileOrder.splice(item, 1);
+
+                  console.log(response);
                 })["catch"](function (error) {
                   console.log(error);
                 });
 
-              case 4:
+              case 6:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
+        }, _callee2, this);
       }));
 
       function uploadFile(_x) {

@@ -100,6 +100,8 @@
             {
                 let form = new FormData(); // создаем форму на js
                 form.append('image',item); // поле с именем image
+                let idFolder = this.folder; //id_родительской папки
+                form.append('folder',idFolder); // прикрепляем поле с id 
 
                 await axios.post('/file_upload_save',form,{
                     onUploadProgress: (itemUpload) =>{
@@ -112,6 +114,7 @@
                     this.fileCurrent = '';
                     this.fileFinish.push(item);
                     this.fileOrder.splice(item, 1);
+                    console.log(response);
                 })
                 .catch(error =>{
                     console.log(error);
