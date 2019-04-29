@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 use App\folder;
 use Illuminate\Http\Request;
-use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+use Illuminate\Support\Str;
+use App\file;
 
 class FileController extends Controller
 {
@@ -40,9 +43,31 @@ class FileController extends Controller
         $id_folder = $request['folder'];
         $parent_folder = folder::find($id_folder);// получение родительского каталога
 
+        $file_size =  $file->getSize(); // размер в байтах
+        $free_size = Auth::user()->size - Auth::user()->use_size - $file_size; // свободное место = общее - испол. - тек. размер
 
-        $path = Storage::putFileAs($parent_folder->server_name, $file, $t_name);
+         if( $free_size > 0 )
+        {
+            $model = User::where('id', '=', Auth::user()->id)->first();
+            $model->use_size += $file_size; // добавление файла
+            $model->save();// сохранение новых данных о пользователе
 
-        return response($parent_folder, 200);
+            $new_file = file::create([
+                'user_id'=> Auth::user()->id, 
+                'slug' => (string) Str::uuid(),
+                'user_name' => $name,
+                'size' => $file_size,
+                'server_name' => $t_name,
+                'server_path' => $parent_folder->server_name."\\".$t_name,
+                'parent' =>  $id_folder
+            ]);
+
+            $path = Storage::putFileAs($parent_folder->server_name, $file, $t_name); // сохранение файла в родительскую папку с именем
+            //return response( $file_size, 200);
+            return response()->json('Sucsess', 200);
+        }
+       else 
+           // return view('file.no_space',compact('parent_folder')); 
+           return response()->json('fatal space', 200);
     }
 }

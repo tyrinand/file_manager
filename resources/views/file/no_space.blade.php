@@ -4,12 +4,11 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Загрузка файлов</div>
+                <div class="card-header"></div>
                     <div class="row justify-content-center">
-                        <div class="col-10">
-                           <div id="app">
-                                <upload-file :folder="{{ $folder->id}}" > </upload-file>
-                           </div>
+                        <div class="col-8">
+                             <p class="text-center">У вас нет места</p>
+                             <a class="btn btn-info" href="{{ route('folder_child', $parent_folder->slug) }}">Назад</a>
                         </div>
                     </div>
                 </div>
@@ -31,16 +30,4 @@
     </div>
     <p class=" my_prosent_label">{{Auth::user()->use_size}}  / {{ Auth::user()->size }} Mb</p>
 </div>    
-@endsection
-
-@section('nav-link')
-<li class="nav-item menu-logo">
-    <a class="nav-link"  href="{{ route('root_folder') }}" role="button">
-        <div class="menu-folder-home" title="Корневой каталог"></div>
-  </a>
-</li>
-<li class="nav-item menu-logo">
-    <div class="menu-space" ></div>
-</li>
-
 @endsection
