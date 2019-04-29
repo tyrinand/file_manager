@@ -1850,7 +1850,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     };
   },
-  props: ['folder'],
+  props: ['folder', 'totaluser', 'usesize'],
   methods: {
     fileInputChange: function fileInputChange() {
       // когда пользователь выбирает файлы
@@ -1866,7 +1866,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tempSize += item.size;
       }
 
-      tempSize = (tempSize / 1024).toFixed(2);
       this.totalSize = tempSize;
     },
     deleteFile: function deleteFile(index) {
@@ -1898,7 +1897,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }
 
-      tempSize = (tempSize / 1024).toFixed(2);
       this.totalSize = tempSize;
     },
     formatSize: function formatSize(value) {
@@ -1909,74 +1907,88 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _uploadfiles = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var files, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, item;
+        var files, free_size, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, item;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 files = this.fileOrder.slice();
+                free_size = this.totaluser - this.usesize - this.totalSize; // из общего размера вычитаем занятый и текущий
+
+                if (!(free_size > 0)) {
+                  _context.next = 31;
+                  break;
+                }
+
                 _iteratorNormalCompletion2 = true;
                 _didIteratorError2 = false;
                 _iteratorError2 = undefined;
-                _context.prev = 4;
+                _context.prev = 6;
                 _iterator2 = files[Symbol.iterator]();
 
-              case 6:
+              case 8:
                 if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-                  _context.next = 13;
+                  _context.next = 15;
                   break;
                 }
 
                 item = _step2.value;
-                _context.next = 10;
+                _context.next = 12;
                 return this.uploadFile(item);
 
-              case 10:
+              case 12:
                 _iteratorNormalCompletion2 = true;
-                _context.next = 6;
-                break;
-
-              case 13:
-                _context.next = 19;
+                _context.next = 8;
                 break;
 
               case 15:
-                _context.prev = 15;
-                _context.t0 = _context["catch"](4);
+                _context.next = 21;
+                break;
+
+              case 17:
+                _context.prev = 17;
+                _context.t0 = _context["catch"](6);
                 _didIteratorError2 = true;
                 _iteratorError2 = _context.t0;
 
-              case 19:
-                _context.prev = 19;
-                _context.prev = 20;
+              case 21:
+                _context.prev = 21;
+                _context.prev = 22;
 
                 if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
                   _iterator2["return"]();
                 }
 
-              case 22:
-                _context.prev = 22;
+              case 24:
+                _context.prev = 24;
 
                 if (!_didIteratorError2) {
-                  _context.next = 25;
+                  _context.next = 27;
                   break;
                 }
 
                 throw _iteratorError2;
 
-              case 25:
-                return _context.finish(22);
-
-              case 26:
-                return _context.finish(19);
-
               case 27:
+                return _context.finish(24);
+
+              case 28:
+                return _context.finish(21);
+
+              case 29:
+                _context.next = 32;
+                break;
+
+              case 31:
+                alert("Недостаточно места!!!");
+
+              case 32:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[4, 15, 19, 27], [20,, 22, 26]]);
+        }, _callee, this, [[6, 17, 21, 29], [22,, 24, 28]]);
       }));
 
       function uploadfiles() {
@@ -37847,18 +37859,18 @@ var render = function() {
   return _c("div", [
     _c("br"),
     _vm._v(" "),
-    _vm.totalSize < 1024
+    _vm.totalSize / 1024 < 1024
       ? _c("p", { staticClass: "text-center" }, [
           _vm._v(
             "Общий размер файлов: " +
-              _vm._s(_vm.formatSize(_vm.totalSize)) +
+              _vm._s(_vm.formatSize(_vm.totalSize / 1024)) +
               " Kb"
           )
         ])
       : _c("p", { staticClass: "text-center" }, [
           _vm._v(
             "Общий размер файлов: " +
-              _vm._s(_vm.formatSize(_vm.totalSize / 1024)) +
+              _vm._s(_vm.formatSize(_vm.totalSize / 1048576)) +
               " Mb"
           )
         ]),

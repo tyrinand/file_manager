@@ -8,7 +8,7 @@
                     <div class="row justify-content-center">
                         <div class="col-10">
                            <div id="app">
-                                <upload-file :folder="{{ $folder->id}}" > </upload-file>
+                                <upload-file :folder="{{ $folder->id }}" :totaluser="{{ Auth::user()->size }}" :usesize="{{ Auth::user()->use_size }}"  > </upload-file>
                            </div>
                         </div>
                     </div>

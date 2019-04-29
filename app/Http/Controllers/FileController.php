@@ -33,6 +33,10 @@ class FileController extends Controller
     {  
         return view('file.upload',compact('folder')); 
     }
+    public function no_space($error, $parent_folder) // страница для ошибок
+    {  
+        return view('file.no_space',compact('parent_folder','error')); 
+    }
     public function upload(Request $request) //  сохранение $request->file('image')->store('test','public');
     {  
         $file = $request->file('image'); // сам файл в запросе
@@ -67,7 +71,9 @@ class FileController extends Controller
             return response()->json('Sucsess', 200);
         }
        else 
-           // return view('file.no_space',compact('parent_folder')); 
-           return response()->json('fatal space', 200);
+        {
+            return response()->json('no_space', 200);
+        }
+             
     }
 }

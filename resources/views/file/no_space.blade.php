@@ -7,7 +7,7 @@
                 <div class="card-header"></div>
                     <div class="row justify-content-center">
                         <div class="col-8">
-                             <p class="text-center">У вас нет места</p>
+                             <p class="text-center">{{ $error }}</p>
                              <a class="btn btn-info" href="{{ route('folder_child', $parent_folder->slug) }}">Назад</a>
                         </div>
                     </div>

@@ -1,8 +1,8 @@
 <template>
 <div>
 <br>
-    <p v-if="totalSize < 1024" class="text-center">Общий размер файлов: {{ formatSize(totalSize) }} Kb</p>
-     <p v-else class="text-center">Общий размер файлов: {{ formatSize(totalSize/1024) }} Mb</p>
+    <p v-if="(totalSize/1024) < 1024" class="text-center">Общий размер файлов: {{ formatSize(totalSize/1024) }} Kb</p>
+    <p v-else class="text-center">Общий размер файлов: {{ formatSize(totalSize/1048576) }} Mb</p>
 
     <div class="row justify-content-center" v-if="fileProgress > 0">
     <hr>
@@ -62,7 +62,7 @@
                totalSize: 0, // размер выбранных файлов
            }
        },
-       props:['folder'],
+       props:['folder', 'totaluser', 'usesize'],
        methods: {
             fileInputChange(){ // когда пользователь выбирает файлы
                let files = Array.from(event.target.files);
@@ -73,7 +73,6 @@
                {
                    tempSize += item.size;
                }
-              tempSize = (tempSize/1024).toFixed(2);
             this.totalSize = tempSize;
            },
             deleteFile(index){ // методу удаления из списка на отправку
@@ -83,7 +82,6 @@
                 {
                    tempSize += item.size;
                 }
-                tempSize = (tempSize/1024).toFixed(2);
             this.totalSize = tempSize;
             },
             formatSize(value) {
@@ -92,9 +90,14 @@
             },
             async uploadfiles(){
                 let files = this.fileOrder.slice();
-                for(let item of files){
-                    await this.uploadFile(item);
+                let free_size = this.totaluser - this.usesize - this.totalSize; // из общего размера вычитаем занятый и текущий
+                if( free_size > 0)
+                {
+                    for(let item of files)
+                        await this.uploadFile(item);
                 }
+                else
+                    alert("Недостаточно места!!!");
             },
             async uploadFile(item)
             {
