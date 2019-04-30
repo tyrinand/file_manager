@@ -31,7 +31,7 @@ class FileController extends Controller
 
     public function uploadform(folder $folder) // форма для загрузки
     {  
-        return view('file.upload',compact('folder')); 
+        return view('file.upload1',compact('folder')); 
     }
     public function no_space($error, $parent_folder) // страница для ошибок
     {  
