@@ -117,7 +117,9 @@
                     this.fileCurrent = '';
                     this.fileFinish.push(item);
                     this.fileOrder.splice(item, 1);
-                    console.log(response);
+                   // console.log(response);
+                    if(response.status === 201)
+                        alert(response.data); // вывести если файл уже существует!!!
                 })
                 .catch(error =>{
                     console.log(error);

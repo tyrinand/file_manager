@@ -2028,9 +2028,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                   _this.fileFinish.push(item);
 
-                  _this.fileOrder.splice(item, 1);
+                  _this.fileOrder.splice(item, 1); // console.log(response);
 
-                  console.log(response);
+
+                  if (response.status === 201) alert(response.data); // вывести если файл уже существует!!!
                 })["catch"](function (error) {
                   console.log(error);
                 });

@@ -48,13 +48,16 @@ class FileController extends Controller
         $parent_folder = folder::find($id_folder);// получение родительского каталога
 
         $file_size =  $file->getSize(); // размер в байтах
-        $free_size = Auth::user()->size - Auth::user()->use_size - $file_size; // свободное место = общее - испол. - тек. размер
+        $free_size = (Auth::user()->size*1048576) - Auth::user()->use_size - $file_size; // свободное место = общее - испол. - тек. размер
 
+        $serv_path = $parent_folder->server_name."\\".$t_name;
          if( $free_size > 0 )
-        {
-            $model = User::where('id', '=', Auth::user()->id)->first();
-            $model->use_size += $file_size; // добавление файла
-            $model->save();// сохранение новых данных о пользователе
+        {  
+            if (file::where('server_path', '=', $serv_path)->count() === 0) //не существует такой файл
+            {
+                $model = User::where('id', '=', Auth::user()->id)->first();
+                $model->use_size += $file_size; // добавление файла
+                $model->save();// сохранение новых данных о пользователе
 
             $new_file = file::create([
                 'user_id'=> Auth::user()->id, 
@@ -62,17 +65,22 @@ class FileController extends Controller
                 'user_name' => $name,
                 'size' => $file_size,
                 'server_name' => $t_name,
-                'server_path' => $parent_folder->server_name."\\".$t_name,
+                'server_path' => $serv_path,
                 'parent' =>  $id_folder
             ]);
 
-            $path = Storage::putFileAs($parent_folder->server_name, $file, $t_name); // сохранение файла в родительскую папку с именем
-            //return response( $file_size, 200);
+            $path = Storage::putFileAs($parent_folder->server_name, $file, $t_name); // сохранение файла в родительскую папку с именем   
             return response()->json('Sucsess', 200);
+            }
+            else
+            {
+                return response()->json('Файл '.$name.' уже существует', 201);
+            }
+            
         }
        else 
         {
-            return response()->json('no_space', 200);
+            return response()->json('Переполнение хранилища', 200);
         }
              
     }
