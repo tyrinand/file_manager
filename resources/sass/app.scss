@@ -50,10 +50,21 @@
   background-image:url(../img/folder.svg);
   background-size: cover;
 }
+.file{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/files.svg);
+  background-size: cover;
+}
 .folder-link{
   text-decoration: none;
 }
 .folder-container{
+  display: flex;
+  align-items: center;
+}
+.file-container{
   display: flex;
   align-items: center;
 }
@@ -133,11 +144,11 @@
     left: 39%;
   }
   .my-table{
-    font-size: 12px;
+    font-size: 11px;
   }
-  .modile-icons{ // класс для уменьшеня размера иконок на мобильниках
-    width: 20px;
-    height: 20px;
+  .modile-icons{ // класс для уменьшеня размера иконок на мобильниках действий
+    width:  18px;
+    height: 18px;
   }
   .file-title-upload{
     font-size: 10px;

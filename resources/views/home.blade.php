@@ -5,12 +5,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">{{ $folder_title }}</div>
-                @if ( ($children_folder->isNotEmpty()) )
+                @if ( ($children_folder->isNotEmpty()) || ($children_file->isNotEmpty()) )
                     <table class="table table-bordered table-sm my-table">
                       <thead>
                         <tr>
                           <th>Имя</th>
-                          <th>Дата создания</th>
+                          <th class="d-none d-md-table-cell">Дата создания</th>
+                          <th>Размер</th>
                           <th>Действия</th>
                         </tr>
                         </thead>
@@ -26,7 +27,8 @@
                                 </div>    
                               </a>
                             </td>
-                            <td>{{ \Carbon\Carbon::parse($fl->created_at)->format('d.m.Y') }} </td>
+                            <td class="d-none d-md-table-cell">{{ \Carbon\Carbon::parse($fl->created_at)->format('d.m.Y') }} </td>
+                            <td></td>
                             <td>
                               <form class="" action="{{ route('folder_delete',$fl->slug) }}" method="post" onsubmit="if(confirm('Удалить?')){return true}else{return false}">
                                 <input type="hidden" name="_method" value="DELETE">
@@ -38,6 +40,32 @@
                                     <div class="folder-edit modile-icons" title="Переименовать папку"></div>  
                                 </a>
                               </form>
+                            </td> 
+                          </tr>
+                          @endforeach
+                          @foreach ($children_file as $fl)
+                          <tr>
+                            <td>
+                                <div class="file-container" >
+                                    <div class="file modile-icons" ></div>
+                                    <span class="my-min-space"></span>
+                                    {{ $fl->user_name }}
+                                </div>
+                            </td>
+                            <td class="d-none d-md-table-cell">
+                                {{ \Carbon\Carbon::parse($fl->created_at)->format('d.m.Y') }} 
+                            </td>
+                            <td>
+                              @if ($fl->size < 1024)
+                                  {{ $fl->size }} байт
+                              @elseif ($fl->size < 1048576)
+                                    {{ ceil($fl->size/1024) }} КБ
+                              @else
+                                    {{ ceil($fl->size/1048576) }} МБ
+                              @endif
+                            </td>
+                            <td>
+                              
                             </td> 
                           </tr>
                           @endforeach
@@ -57,14 +85,14 @@
 <div class="flex-progress">
     <div class="progress" style="height: 35px;">
     <?php
-        $posent =  (Auth::user()->use_size /  Auth::user()->size)*100;
+        $posent =  (Auth::user()->use_size /  ((Auth::user()->size)*1048576))*100;
     ?>
             <div class="progress-bar progress-bar-striped  " role="progressbar" 
             aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: {{ $posent }}%" >
             </div>
             
     </div>
-    <p class=" my_prosent_label">{{Auth::user()->use_size}}  / {{ Auth::user()->size }} Mb</p>
+    <p class=" my_prosent_label">{{ ceil(Auth::user()->use_size/1048576) }}  / {{ Auth::user()->size }} Mb</p>
 </div>    
 @endsection
 

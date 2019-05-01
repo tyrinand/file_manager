@@ -33,14 +33,14 @@
 <div class="flex-progress">
     <div class="progress" style="height: 35px;">
     <?php
-        $posent =  (Auth::user()->use_size /  Auth::user()->size)*100;
+        $posent =  (Auth::user()->use_size /  ((Auth::user()->size)*1048576))*100;
     ?>
             <div class="progress-bar progress-bar-striped  " role="progressbar" 
             aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: {{ $posent }}%" >
             </div>
             
     </div>
-    <p class=" my_prosent_label">{{Auth::user()->use_size}}  / {{ Auth::user()->size }} Mb</p>
+    <p class=" my_prosent_label">{{ ceil(Auth::user()->use_size/1048576) }}  / {{ Auth::user()->size }} Mb</p>
 </div>    
 @endsection
 

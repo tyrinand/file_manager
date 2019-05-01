@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\folder;
+use App\file;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -113,7 +114,9 @@ class FolderController extends Controller
 
                 $folder_title =  $parent_folder->title;
                 // необходимо соответствие имен
-                return view('home', compact('children_folder','folder_title','parent_folder')); 
+                $children_file = file::where('parent',$parent_folder->id)->get();
+
+                return view('home', compact('children_folder','folder_title','parent_folder','children_file')); 
         else:   return redirect()->route('logout');
         endif;    
            
@@ -142,9 +145,10 @@ class FolderController extends Controller
                             ->get();                    
         //dd($children_folder);
 
+        $children_file = file::where('parent',$root_users->id)->get();
         // foldername for title
         $folder_title = $root_users->title; // заголовок
         $parent_folder = $root_users; // родительский каталог
-        return view('home', compact('children_folder','folder_title','parent_folder')); 
+        return view('home', compact('children_folder','folder_title','parent_folder','children_file')); 
     }
 }

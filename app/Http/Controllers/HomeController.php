@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\folder;
+use App\file;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -39,6 +40,10 @@ class HomeController extends Controller
         // foldername for title
         $folder_title = $root_users->title; // заголовок
         $parent_folder = $root_users; // родительский каталог
-        return view('home', compact('children_folder','folder_title','parent_folder'));    
+        // упаковка файлов в папке
+        $children_file = file::where('parent', $root_users->id)
+                                ->where('user_id', $current_user->id) // дочерние файлы принадлежащие пользователю
+                                ->get();
+        return view('home', compact('children_folder','folder_title','parent_folder','children_file'));    
     }
 }

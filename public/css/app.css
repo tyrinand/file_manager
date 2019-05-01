@@ -10705,11 +10705,24 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.file {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/files.svg?2fe5310803976831b85b9bc2e8f91331);
+  background-size: cover;
+}
+
 .folder-link {
   text-decoration: none;
 }
 
 .folder-container {
+  display: flex;
+  align-items: center;
+}
+
+.file-container {
   display: flex;
   align-items: center;
 }
@@ -10804,12 +10817,12 @@ a.text-dark:focus {
   }
 
   .my-table {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .modile-icons {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   .file-title-upload {

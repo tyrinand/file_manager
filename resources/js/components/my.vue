@@ -9,7 +9,7 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item menu-logo">
               <a class="nav-link"  v-bind:href="routeroot[0]" role="button" >
-                <div class="menu-folder-home" title="Корневой каталог"></div>
+                <div class="menu-folder-up" title="Корневой каталог"></div>
               </a>
             </li>
           </ul>

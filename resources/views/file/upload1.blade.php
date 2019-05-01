@@ -10,8 +10,14 @@
 </head>
 <body>
     <div id="app">
+
     <?php
-        $urls = [ route('root_folder'), Auth::user()->login  ,route('logout') , Auth::user()->size ];
+        if($folder->root === 1)
+            $folder_url = route('root_folder');
+        else    
+            $folder_url = route('folder_parent',$folder);    
+
+        $urls = [ $folder_url , Auth::user()->login  ,route('logout') , Auth::user()->size ];
         $posent =  (Auth::user()->use_size /  ((Auth::user()->size)*1048576))*100;
     ?>
         <my-upload :folder="{{ $folder->id }}" :routeroot="{{ json_encode($urls) }}" :totaluser="{{ (Auth::user()->size)*1048576 }}" :usesize="{{ Auth::user()->use_size }}" 
