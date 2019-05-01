@@ -33,10 +33,19 @@ class FileController extends Controller
     {  
         return view('file.upload1',compact('folder')); 
     }
-    public function no_space($error, $parent_folder) // страница для ошибок
+    public function share(file $file) // форма для отправки
     {  
-        return view('file.no_space',compact('parent_folder','error')); 
+        $parent_folder = folder::find($file->parent);
+        return view('file.share',compact('file','parent_folder')); 
     }
+
+    public function download(file $file)  //маршрут загрузки
+    {  
+        return response()->download(storage_path('app/' . $file->server_path));
+    }
+
+
+
     public function upload(Request $request) //  сохранение $request->file('image')->store('test','public');
     {  
         $file = $request->file('image'); // сам файл в запросе

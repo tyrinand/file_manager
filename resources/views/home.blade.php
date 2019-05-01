@@ -29,7 +29,7 @@
                             </td>
                             <td class="d-none d-md-table-cell">{{ \Carbon\Carbon::parse($fl->created_at)->format('d.m.Y') }} </td>
                             <td></td>
-                            <td>
+                            <td> <!-- действия для папок -->
                               <form class="" action="{{ route('folder_delete',$fl->slug) }}" method="post" onsubmit="if(confirm('Удалить?')){return true}else{return false}">
                                 <input type="hidden" name="_method" value="DELETE">
                                   {{ csrf_field() }}
@@ -64,8 +64,10 @@
                                     {{ ceil($fl->size/1048576) }} МБ
                               @endif
                             </td>
-                            <td>
-                              
+                            <td> <!-- действия для файлов -->
+                              <a href="{{ route('share',$fl->slug) }}">  
+                                    <div class="share-file modile-icons" title="Ссылка на файл"></div>  
+                                </a>
                             </td> 
                           </tr>
                           @endforeach

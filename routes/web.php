@@ -38,4 +38,5 @@ Route::get('/root_folder','FolderController@root_folder')->name('root_folder'); 
 // работа с файлами 
 Route::get('/file_upload/{folder}','FileController@uploadform')->name('file_upload'); // форма создания
 Route::post('/file_upload_save','FileController@upload')->name('file_save'); // сохранение на сервере
-Route::get('/file_no_space','FileController@no_space')->name('no_space'); // маршрут при ошибках на сервере
+Route::get('/file_share/{file}','FileController@share')->name('share'); // маршрут для формы отправки
+Route::get('/file_download/{file}','FileController@download')->name('download'); // маршрут для загрузки файла

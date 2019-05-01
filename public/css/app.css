@@ -10762,6 +10762,14 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.share-file {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/share_files.svg?b708579be32613cf9d6059c313ce708f);
+  background-size: cover;
+}
+
 .menu-folder-up {
   display: inline-block;
   width: 40px;
