@@ -7,6 +7,7 @@
                 <div class="card-header">Загрузка файла: {{ $file->user_name }}</div>
                     <div class="row justify-content-center">
                         <div class="col-8">
+                        @if ($file->public_url === 1)
                             <p class="text-center">Для загрузки авторизуйтесь</p>
                             <form method="POST" action="{{ route('download_form_login') }}">
                                 <input type="hidden" name="file" value="{{  $file->slug }}" />
@@ -29,6 +30,9 @@
                                 </div>
                             </div>
                         </form>
+                        @else
+                            <p class="text-center">Файл изъят из публичного доступа</p>
+                        @endif    
                         </div>
                     </div>
                 </div>
