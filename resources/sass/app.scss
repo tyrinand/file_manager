@@ -57,6 +57,13 @@
   background-image:url(../img/files.svg);
   background-size: cover;
 }
+.file-public{
+  display: inline-block;
+  width: 23px;
+  height: 30px;
+  background-image:url(../img/public_files.svg);
+  background-size: cover;
+}
 .folder-link{
   text-decoration: none;
 }
@@ -101,6 +108,21 @@
   width: 30px;
   height: 30px;
   background-image:url(../img/share_files.svg);
+  background-size: cover;
+}
+
+.close-file{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/close_files.svg);
+  background-size: cover;
+}
+.download-file{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/download_file.svg);
   background-size: cover;
 }
 .menu-folder-up{

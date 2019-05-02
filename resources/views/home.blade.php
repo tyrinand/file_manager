@@ -4,6 +4,12 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
+            @if (session('status'))
+              <!-- флеш сообщение -->
+              <div class="alert alert-success text-center">
+                {{ session('status') }}
+              </div>
+            @endif
                 <div class="card-header">{{ $folder_title }}</div>
                 @if ( ($children_folder->isNotEmpty()) || ($children_file->isNotEmpty()) )
                     <table class="table table-bordered table-sm my-table">
@@ -47,7 +53,11 @@
                           <tr>
                             <td>
                                 <div class="file-container" >
-                                    <div class="file modile-icons" ></div>
+                                      @if ($fl->public_url === 1)
+                                          <div class="file-public modile-icons" ></div>
+                                      @else
+                                          <div class="file modile-icons" ></div>
+                                      @endif
                                     <span class="my-min-space"></span>
                                     {{ $fl->user_name }}
                                 </div>
@@ -65,8 +75,14 @@
                               @endif
                             </td>
                             <td> <!-- действия для файлов -->
-                              <a href="{{ route('share',$fl->slug) }}">  
-                                    <div class="share-file modile-icons" title="Ссылка на файл"></div>  
+                                <a href="{{ route('master_download',$fl->slug) }}">  
+                                    <div class="download-file modile-icons" title="Скачать"></div>  
+                                </a>
+                                <a href="{{ route('share',$fl->slug) }}">  
+                                    <div class="share-file modile-icons" title="Поделиться"></div>  
+                                </a>
+                                <a href="{{ route('file_close',$fl->slug) }}">  
+                                    <div class="close-file modile-icons" title="Закрыть доступ"></div>  
                                 </a>
                             </td> 
                           </tr>

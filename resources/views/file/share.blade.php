@@ -7,11 +7,22 @@
                 <div class="card-header">{{ $file->user_name }}</div>
                 <div class="row justify-content-center">
                     <div class="col-8">
-                    <br>    
-                        <input id="link-text" class="form-control" type="text" value={{ route('download',$file) }} />
+                    <br> 
+                   
+                        <div class="row justify-content-center">
+                            <p>Файл доступен извне</p>
+                        </div>    
+                     <div class="row justify-content-center">    
+                        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+                        <script src="//yastatic.net/share2/share.js"></script>
+                        <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter,viber,whatsapp,telegram" data-url="{{ route('download',$file) }}" size="m">
+                        </div>
+                    </div> 
+                    <br>
+                       <input id="myInput" class="form-control" type="text" value={{ route('download',$file) }} />
                         <br>
                         <div class="row justify-content-center">
-                            <button id="copy-link" class="btn btn-primary">Копировать</button>
+                            <button id="copy-link" class="btn btn-primary" onclick="myCopyFun()">Копировать</button>
                         </div>    
                     </div>
                 </div>    
@@ -47,4 +58,14 @@
     <div class="menu-folder-up" title="Вверх"></div>
   </a>
 </li>
+@endsection
+@section('scripts')
+    <script>
+        function myCopyFun() {
+            let copyText = document.getElementById("myInput");
+            copyText.select();
+            document.execCommand("copy");
+            alert('Скопированно');
+        }
+    </script>
 @endsection

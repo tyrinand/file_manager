@@ -10713,6 +10713,14 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.file-public {
+  display: inline-block;
+  width: 23px;
+  height: 30px;
+  background-image: url(/images/public_files.svg?708d04de0b58ea0a194f212f96349982);
+  background-size: cover;
+}
+
 .folder-link {
   text-decoration: none;
 }
@@ -10767,6 +10775,22 @@ a.text-dark:focus {
   width: 30px;
   height: 30px;
   background-image: url(/images/share_files.svg?b708579be32613cf9d6059c313ce708f);
+  background-size: cover;
+}
+
+.close-file {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/close_files.svg?c086ff3b4a88467883bacc182c40ebc2);
+  background-size: cover;
+}
+
+.download-file {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/download_file.svg?6ae59ec41000a040d588acb190ffb6df);
   background-size: cover;
 }
 

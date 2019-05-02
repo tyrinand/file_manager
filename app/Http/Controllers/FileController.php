@@ -34,17 +34,34 @@ class FileController extends Controller
         return view('file.upload1',compact('folder')); 
     }
     public function share(file $file) // форма для отправки
-    {  
+    {   
+        $file->public_url = 1; // файл стал публичным
+        $file->save();// сохранение
+
         $parent_folder = folder::find($file->parent);
         return view('file.share',compact('file','parent_folder')); 
+    }
+    public function close(file $file) // закрытие файла
+    {   
+        $file->public_url = 0; // файл стал публичным
+        $file->save();// сохранение
+
+        $parent_folder = folder::find($file->parent);
+        return redirect()->route('folder_child',$parent_folder)->with('status', 'Доступ к файлу закрыт');;
     }
 
     public function download(file $file)  //маршрут загрузки
     {  
-        return response()->download(storage_path('app/' . $file->server_path));
+        return response()->download(storage_path('app/' . $file->server_path)); //внутренняя загрузка
     }
 
-
+    public function master_download(file $file)  //маршрут загрузки для владельца
+    {   
+        if($file->user_id === Auth::user()->id)
+            return response()->download(storage_path('app/' . $file->server_path)); //внутренняя загрузка
+        else 
+            redirect()->route('logout'); // если не владелец занчит выйти из системы
+    }
 
     public function upload(Request $request) //  сохранение $request->file('image')->store('test','public');
     {  

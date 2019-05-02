@@ -39,4 +39,6 @@ Route::get('/root_folder','FolderController@root_folder')->name('root_folder'); 
 Route::get('/file_upload/{folder}','FileController@uploadform')->name('file_upload'); // форма создания
 Route::post('/file_upload_save','FileController@upload')->name('file_save'); // сохранение на сервере
 Route::get('/file_share/{file}','FileController@share')->name('share'); // маршрут для формы отправки
-Route::get('/file_download/{file}','FileController@download')->name('download'); // маршрут для загрузки файла
+Route::get('/file_download/{file}','FileController@download')->name('download'); // маршрут для загрузки извне
+Route::get('/file_download_master/{file}','FileController@master_download')->name('master_download'); // маршрут для загрузки внутри
+Route::get('/file_close/{file}','FileController@close')->name('file_close'); // закрытие доступа
