@@ -15,11 +15,11 @@
                      <div class="row justify-content-center">    
                         <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
                         <script src="//yastatic.net/share2/share.js"></script>
-                        <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter,viber,whatsapp,telegram" data-url="{{ route('download',$file) }}" size="m">
+                        <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter,viber,whatsapp,telegram" data-url="{{ route('download_form',$file) }}" size="m">
                         </div>
                     </div> 
                     <br>
-                       <input id="myInput" class="form-control" type="text" value={{ route('download',$file) }} />
+                       <input id="myInput" class="form-control" type="text" value={{ route('download_form',$file) }} />
                         <br>
                         <div class="row justify-content-center">
                             <button id="copy-link" class="btn btn-primary" onclick="myCopyFun()">Копировать</button>

@@ -54,9 +54,9 @@
                             <td>
                                 <div class="file-container" >
                                       @if ($fl->public_url === 1)
-                                          <div class="file-public modile-icons" ></div>
+                                          <div class="file-public modile-icons" title="Публичный файл"></div>
                                       @else
-                                          <div class="file modile-icons" ></div>
+                                          <div class="file modile-icons" title="Локальный файл"></div>
                                       @endif
                                     <span class="my-min-space"></span>
                                     {{ $fl->user_name }}

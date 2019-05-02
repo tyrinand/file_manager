@@ -28,7 +28,6 @@ class MyAvt extends Controller
      {
        $login = $request['login'];
        $password = $request['password'];
-
         if ( Auth::attempt(['login' => $login, 'password' => $password]) ): // есть в локальной БД
             if(Auth::user()->enable === 1) 
                 return redirect()->route('home');
