@@ -10728,20 +10728,22 @@ a.text-dark:focus {
 .folder-container {
   display: flex;
   align-items: center;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
 }
 
 .file-container {
   display: flex;
   align-items: center;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
 }
 
 .my-file-name {
   border: 1px solid red;
   word-wrap: break-word;
+  width: 75%;
+}
+
+.name-td {
+  width: 40%;
+  border: 1px solid red;
 }
 
 .my-min-space {

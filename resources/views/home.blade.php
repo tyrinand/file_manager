@@ -12,7 +12,7 @@
             @endif
                 <div class="card-header">{{ $folder_title }}</div>
                 @if ( ($children_folder->isNotEmpty()) || ($children_file->isNotEmpty()) )
-                    <table class="table table-bordered table-sm my-table ">
+                    <table class="table table-bordered table-sm my-table table-condensed">
                       <thead>
                         <tr>
                           <th>Имя</th>
@@ -24,7 +24,7 @@
                         <tbody>
                           @foreach ($children_folder as $fl)
                           <tr>
-                            <td>
+                            <td >
                               <a href="{{ route('folder_child',$fl->slug) }}" class="folder-link">  
                                 <div class="folder-container" >
                                     <div class="folder modile-icons" ></div>
@@ -51,7 +51,7 @@
                           @endforeach
                           @foreach ($children_file as $fl)
                           <tr>
-                            <td>
+                            <td >
                                 <div class="file-container" >
                                       @if ($fl->public_url === 1)
                                           <div class="file-public modile-icons" title="Публичный файл"></div>
