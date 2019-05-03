@@ -93,15 +93,24 @@ class FolderController extends Controller
 
     public function destroy(folder $folder)
     {
-        
         if($this->blong_user($folder)):
-    
-                $parent_folder = folder::where('id', $folder->parent)
+
+            $folders =  folder::where('parent', $folder->id)->count();
+            $files = file::withTrashed()->where('parent', $folder->id)->count();
+            $parent_folder = folder::where('id', $folder->parent)
                         ->where('user_id', Auth::user()->id)
                         ->first();
-            $folder->delete();
-            Storage::deleteDirectory($folder->server_name);
-        return redirect()->route('folder_child',$parent_folder); // отображение родительской папки пока что home
+
+            if( ($folders > 0) || ($files > 0))
+                {  
+                    return redirect()->route('folder_child',$parent_folder)->with('status', 'Для удаления папки удалите дочерние элементы'); // отображение родительской папки пока что home
+                }
+            else 
+                {
+                    $folder->delete();
+                    Storage::deleteDirectory($folder->server_name);
+                    return redirect()->route('folder_child',$parent_folder);
+                }
         else:   return redirect()->route('logout');
         endif;
     }

@@ -10728,11 +10728,20 @@ a.text-dark:focus {
 .folder-container {
   display: flex;
   align-items: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .file-container {
   display: flex;
   align-items: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.my-file-name {
+  border: 1px solid red;
+  word-wrap: break-word;
 }
 
 .my-min-space {
@@ -10748,9 +10757,19 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.icon-file-delete {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/delete_file.svg?c4fb3a64262797125fe66c1e03331f69);
+  background-size: cover;
+}
+
 .my-submit-btn {
   background-color: transparent;
   border: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .my-submit-btn:active,
@@ -10807,6 +10826,14 @@ a.text-dark:focus {
   width: 40px;
   height: 40px;
   background-image: url(/images/folder_home_2.svg?32dade639a7c064f130f58147ced9338);
+  background-size: cover;
+}
+
+.menu-trash {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url(/images/trash.svg?1534c86ee501c9302e862706a39f8333);
   background-size: cover;
 }
 

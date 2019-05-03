@@ -47,7 +47,7 @@ class FileController extends Controller
         $file->save();// сохранение
 
         $parent_folder = folder::find($file->parent);
-        return redirect()->route('folder_child',$parent_folder)->with('status', 'Доступ к файлу закрыт');;
+        return redirect()->route('folder_child',$parent_folder)->with('status', 'Доступ к файлу закрыт');
     }
 
     public function download(file $file)  //маршрут загрузки
@@ -109,5 +109,12 @@ class FileController extends Controller
             return response()->json('Переполнение хранилища', 200);
         }
              
+    }
+    // работа с корзиной и удаление
+    public function delete_basket(file $file)  //маршрут удаления в корзину
+    {  
+        $file->delete();
+        $parent_folder = folder::find($file->parent);
+        return redirect()->route('folder_child',$parent_folder);
     }
 }

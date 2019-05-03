@@ -12,7 +12,7 @@
             @endif
                 <div class="card-header">{{ $folder_title }}</div>
                 @if ( ($children_folder->isNotEmpty()) || ($children_file->isNotEmpty()) )
-                    <table class="table table-bordered table-sm my-table">
+                    <table class="table table-bordered table-sm my-table ">
                       <thead>
                         <tr>
                           <th>Имя</th>
@@ -29,7 +29,7 @@
                                 <div class="folder-container" >
                                     <div class="folder modile-icons" ></div>
                                     <span class="my-min-space"></span>
-                                    {{ $fl->user_name }}
+                                    <span class="my-file-name">{{ $fl->user_name }}</span>
                                 </div>    
                               </a>
                             </td>
@@ -59,7 +59,7 @@
                                           <div class="file modile-icons" title="Локальный файл"></div>
                                       @endif
                                     <span class="my-min-space"></span>
-                                    {{ $fl->user_name }}
+                                    <span class="my-file-name">{{ $fl->user_name }}</span>
                                 </div>
                             </td>
                             <td class="d-none d-md-table-cell">
@@ -75,6 +75,9 @@
                               @endif
                             </td>
                             <td> <!-- действия для файлов -->
+                            <form class="" action="{{ route('delete_basket',$fl->slug) }}" method="post" onsubmit="if(confirm('Удалить?')){return true}else{return false}">
+                                <input type="hidden" name="_method" value="DELETE">
+                                 {{ csrf_field() }}
                                 <a href="{{ route('master_download',$fl->slug) }}">  
                                     <div class="download-file modile-icons" title="Скачать"></div>  
                                 </a>
@@ -84,6 +87,10 @@
                                 <a href="{{ route('file_close',$fl->slug) }}">  
                                     <div class="close-file modile-icons" title="Закрыть доступ"></div>  
                                 </a>
+                                <button type="submit" class="my-submit-btn">
+                                  <div class="icon-file-delete modile-icons" title="Удалить файл"></div>
+                                </button>
+                             </form>   
                             </td> 
                           </tr>
                           @endforeach
@@ -139,6 +146,11 @@
 <li class="nav-item menu-logo">
   <a class="nav-link"  href="{{ route('root_folder') }}" role="button">
     <div class="menu-folder-home" title="Корневой каталог"></div>
+  </a>
+</li>
+<li class="nav-item menu-logo">
+  <a class="nav-link" href="{{ route('root_folder') }}" role="button">
+    <div class="menu-trash" title="Корзина"></div>
   </a>
 </li>
 @endsection
