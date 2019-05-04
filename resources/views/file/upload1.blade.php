@@ -15,7 +15,7 @@
         if($folder->root === 1)
             $folder_url = route('root_folder');
         else    
-            $folder_url = route('folder_parent',$folder);    
+            $folder_url = route('folder_child',$folder);    
 
         $urls = [ $folder_url , Auth::user()->login  ,route('logout') , Auth::user()->size ];
         $posent =  (Auth::user()->use_size /  ((Auth::user()->size)*1048576))*100;
