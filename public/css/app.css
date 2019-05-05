@@ -10761,6 +10761,14 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.restore-file {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/files_restore.svg?307c1c3fcb59f76c244952796c175553);
+  background-size: cover;
+}
+
 .my-submit-btn {
   background-color: transparent;
   border: 0;

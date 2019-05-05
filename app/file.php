@@ -16,4 +16,8 @@ class file extends Model
     protected $fillable = [
         'user_id', 'user_name', 'size','server_name','server_path', 'parent', 'slug'
     ];
+    public function folder()
+    {
+        return $this->belongsTo('App\folder', 'parent', 'id');
+    }
 }

@@ -97,6 +97,13 @@
   background-image:url(../img/delete_file.svg);
   background-size: cover;
 }
+.restore-file{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/files_restore.svg);
+  background-size: cover;
+}
 .my-submit-btn{
   background-color: transparent;
   border: 0;

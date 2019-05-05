@@ -18,4 +18,8 @@ class folder extends Model
     {
         return $this->belongsTo('App\User','user_id', 'id');
     }
+    public function files() // много файлов
+    {
+        return $this->hasMany('App\file','parent', 'id');
+    }
 }

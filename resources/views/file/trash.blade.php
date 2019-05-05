@@ -16,7 +16,7 @@
                       <thead>
                         <tr>
                           <th>Имя</th>
-                          <th class="d-none d-md-table-cell">Родительской каталог</th>
+                          <th class="d-none d-md-table-cell">Путь к файлу</th>
                           <th>Размер</th>
                           <th>Действия</th>
                         </tr>
@@ -44,7 +44,7 @@
                                 </div>
                             </td>
                             <td class="d-none d-md-table-cell">
-                                {{ \Carbon\Carbon::parse($fl->created_at)->format('d.m.Y') }} 
+                                {{ $fl->folder->title }} 
                             </td>
                             <td>
                               @if ($fl->size < 1024)
@@ -60,7 +60,7 @@
                                 <input type="hidden" name="_method" value="DELETE">
                                  {{ csrf_field() }}
                                 <a href="#">   <!--  href="{{ route('share',$fl->slug) }}" -->
-                                    <div class="download-file modile-icons" title="Восстановить"></div>  
+                                    <div class="restore-file modile-icons" title="Восстановить"></div>  
                                 </a>
                                 <button type="submit" class="my-submit-btn">
                                   <div class="icon-file-delete modile-icons" title="Удалить файл"></div>
