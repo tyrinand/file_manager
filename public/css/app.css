@@ -10736,14 +10736,8 @@ a.text-dark:focus {
 }
 
 .my-file-name {
-  border: 1px solid red;
   word-wrap: break-word;
   width: 75%;
-}
-
-.name-td {
-  width: 40%;
-  border: 1px solid red;
 }
 
 .my-min-space {
@@ -10892,6 +10886,16 @@ a.text-dark:focus {
 
   .menu-space {
     display: none;
+  }
+
+  .my-file-name {
+    width: 136px;
+  }
+}
+
+@media screen and (max-width: 549px) {
+  .my-file-name {
+    width: 136px;
   }
 }
 

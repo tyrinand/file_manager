@@ -113,8 +113,18 @@ class FileController extends Controller
     // работа с корзиной и удаление
     public function delete_basket(file $file)  //маршрут удаления в корзину
     {  
+        $file->public_url = 0; // файл стал непубличным
+        $file->save();// сохранение
         $file->delete();
         $parent_folder = folder::find($file->parent);
-        return redirect()->route('folder_child',$parent_folder);
+        return redirect()->route('folder_child',$parent_folder)->with('status', 'Файл перемещен в корзину');
     }
+    public function basket_all(folder $folder)  //маршрут удаления в корзину
+    {  
+        $children_file = file::onlyTrashed()->where('user_id',Auth::user()->id)->get();
+        // только удаленные и текущего пользователя
+        $parent_folder =  $folder;
+        return view('file.trash',compact('children_file','parent_folder')); 
+    }
+
 }

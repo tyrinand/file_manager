@@ -37936,7 +37936,7 @@ var render = function() {
                     [
                       _c("div", {
                         staticClass: "menu-folder-up",
-                        attrs: { title: "Корневой каталог" }
+                        attrs: { title: "" }
                       })
                     ]
                   )

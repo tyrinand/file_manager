@@ -29,7 +29,19 @@
                                 <div class="folder-container" >
                                     <div class="folder modile-icons" ></div>
                                     <span class="my-min-space"></span>
-                                    <span class="my-file-name">{{ $fl->user_name }}</span>
+                                    <?php 
+                                          if(strlen($fl->user_name) > 45)
+                                          {
+                                            $new_p1 = mb_substr($fl->user_name, 0, 20,'UTF-8');
+                                            $new_p2 = mb_substr($fl->user_name, -20, 20,'UTF-8');
+                                            $new_name = $new_p1."...".$new_p2;
+                                          }
+                                          else
+                                          {
+                                            $new_name = $fl->user_name;
+                                          }
+                                    ?>
+                                    <span class="my-file-name">{{$new_name }}</span>
                                 </div>    
                               </a>
                             </td>
@@ -59,7 +71,19 @@
                                           <div class="file modile-icons" title="Локальный файл"></div>
                                       @endif
                                     <span class="my-min-space"></span>
-                                    <span class="my-file-name">{{ $fl->user_name }}</span>
+                                    <?php 
+                                          if(strlen($fl->user_name) > 45)
+                                          {
+                                            $new_p1 = mb_substr($fl->user_name, 0, 20,'UTF-8');
+                                            $new_p2 = mb_substr($fl->user_name, -20, 20,'UTF-8');
+                                            $new_name = $new_p1."...".$new_p2;
+                                          }
+                                          else
+                                          {
+                                            $new_name = $fl->user_name;
+                                          }
+                                    ?>
+                                    <span class="my-file-name">{{ $new_name }}</span>
                                 </div>
                             </td>
                             <td class="d-none d-md-table-cell">
@@ -149,7 +173,7 @@
   </a>
 </li>
 <li class="nav-item menu-logo">
-  <a class="nav-link" href="{{ route('root_folder') }}" role="button">
+  <a class="nav-link" href="{{ route('basket',$parent_folder) }}" role="button">
     <div class="menu-trash" title="Корзина"></div>
   </a>
 </li>

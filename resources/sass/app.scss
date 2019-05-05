@@ -76,13 +76,8 @@
   align-items: center;
 }
 .my-file-name{
-  border: 1px solid red;
   word-wrap: break-word;
   width: 75%;
-}
-.name-td{
-  width: 40%;
-  border: 1px solid red;
 }
 .my-min-space{
   display: inline-block;
@@ -211,6 +206,11 @@
     display: none;
   }
   .my-file-name{
-    //width: 136px;
+    width: 136px;
+  }
+}
+@media screen and (max-width: 549px) { // мобилки
+  .my-file-name{
+    width: 136px;
   }
 }
