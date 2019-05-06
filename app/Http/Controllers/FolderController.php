@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Gate;
+
 
 class FolderController extends Controller
 {
@@ -16,28 +18,23 @@ class FolderController extends Controller
     {
         $this->middleware('auth');
     }
-    public function blong_user(folder $folder) // метод принадлежности
-    {
-        if(Auth::user()->id === $folder->user_id):
-            return true;
-        else:
-            return false;
-        endif;
-    }
+
     public function create(folder $folder)
     {   
-        if($this->blong_user($folder)):
-            return view('folder.create',compact('folder')); 
-        else:   
+        if (Gate::denies('holder', $folder)) { 
             return redirect()->route('logout');
-        endif;   
+        }
+            
+        return view('folder.create',compact('folder')); 
     }
 
     public function store(Request $request)
     {
         $parent_folder = folder::where('slug', $request['parent'])->first(); // родитель только 1
 
-        if($this->blong_user($parent_folder)):
+        if (Gate::denies('holder', $parent_folder)) {
+            return redirect()->route('logout');
+        }
                 
             $date = $request->validate([
                 'user_name' => 'required|string|max:225'
@@ -58,43 +55,39 @@ class FolderController extends Controller
         Storage::makeDirectory($new_folder->server_name);
 
         return redirect()->route('folder_child',$parent_folder); // отображение родительской папки пока что home
-
-        else:   return redirect()->route('logout');
-        endif;
     }
 
     public function edit(folder $folder)
     {
-        if($this->blong_user($folder)):
-                $parent_folder = folder::where('id', $folder->parent)->first();
-                return view('folder.edit', compact('folder','parent_folder'));  
-        else:  
-                 return redirect()->route('logout');
-        endif;
+        if (Gate::denies('holder', $folder)) {
+            return redirect()->route('logout');
+        }
         
+        $parent_folder = folder::where('id', $folder->parent)->first();
+
+        return view('folder.edit', compact('folder','parent_folder'));   
     }
 
     public function update(Request $request, folder $folder)
     {
-        if($this->blong_user($folder)):
-                $parent_folder = folder::where('id', $folder->parent)->first();
-
-                $date = $request->validate([
-                    'user_name' => 'required|string|max:225'
-                ]);
-                $date["title"] = $parent_folder->title."\\".$date["user_name"];
-                $folder->update($date);
-                return redirect()->route('folder_child',$parent_folder);
-        else:   
+        if (Gate::denies('holder', $folder)) {
             return redirect()->route('logout');
-        endif;
-        
+        }
+        $parent_folder = folder::where('id', $folder->parent)->first();
+
+        $date = $request->validate([
+            'user_name' => 'required|string|max:225'
+        ]);
+        $date["title"] = $parent_folder->title."\\".$date["user_name"];
+        $folder->update($date);
+        return redirect()->route('folder_child',$parent_folder);
     }
 
     public function destroy(folder $folder)
     {
-        if($this->blong_user($folder)):
-
+        if (Gate::denies('holder', $folder)) {
+            return redirect()->route('logout');
+        }
             $folders =  folder::where('parent', $folder->id)->count();
             $files = file::withTrashed()->where('parent', $folder->id)->count();
             $parent_folder = folder::where('id', $folder->parent)
@@ -111,12 +104,12 @@ class FolderController extends Controller
                     Storage::deleteDirectory($folder->server_name);
                     return redirect()->route('folder_child',$parent_folder);
                 }
-        else:   return redirect()->route('logout');
-        endif;
     }
     public function inter_parent_out_child(folder $folder)
     {
-        if($this->blong_user($folder)):
+        if (Gate::denies('holder', $folder)) {
+            return redirect()->route('logout');
+        }
                 $parent_folder = $folder; // родительская папка
 
                 $children_folder = folder::where('parent', $parent_folder->id)->get();                    
@@ -125,22 +118,18 @@ class FolderController extends Controller
                 // необходимо соответствие имен
                 $children_file = file::where('parent',$parent_folder->id)->get();
 
-                return view('home', compact('children_folder','folder_title','parent_folder','children_file')); 
-        else:   return redirect()->route('logout');
-        endif;    
-           
+                return view('home', compact('children_folder','folder_title','parent_folder','children_file'));            
     }
     public function inter_child_out_parent(folder $folder)
     {
-        if($this->blong_user($folder)):
+        if (Gate::denies('holder', $folder)) {
+            return redirect()->route('logout');
+        }
                 $child = $folder;
                 $parent_folder = folder::where('id', $child->parent) 
                     ->where('user_id', Auth::user()->id)
                     ->first();
-                return redirect()->route('folder_child',$parent_folder);
-        else:   return redirect()->route('logout');
-        endif;
-       
+        return redirect()->route('folder_child',$parent_folder);
     }
     public function root_folder()
     {

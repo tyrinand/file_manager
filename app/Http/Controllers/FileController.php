@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use Illuminate\Support\Str;
 use App\file;
+use Gate;
 
 class FileController extends Controller
 {
@@ -31,10 +32,18 @@ class FileController extends Controller
 
     public function uploadform(folder $folder) // форма для загрузки
     {  
+        if (Gate::denies('holder', $folder)) { 
+            return redirect()->route('logout');
+        }
+
         return view('file.upload1',compact('folder')); 
     }
     public function share(file $file) // форма для отправки
     {   
+        if (Gate::denies('holder', $file)) { 
+            return redirect()->route('logout');
+        }
+
         $file->public_url = 1; // файл стал публичным
         $file->save();// сохранение
 
@@ -43,6 +52,10 @@ class FileController extends Controller
     }
     public function close(file $file) // закрытие файла
     {   
+        if (Gate::denies('holder', $file)) { 
+            return redirect()->route('logout');
+        }
+
         $file->public_url = 0; // файл стал публичным
         $file->save();// сохранение
 
@@ -52,15 +65,19 @@ class FileController extends Controller
 
     public function download(file $file)  //маршрут загрузки
     {  
+        if (Gate::denies('holder', $file)) { 
+            return redirect()->route('logout');
+        }
         return response()->download(storage_path('app/' . $file->server_path)); //внутренняя загрузка
     }
 
     public function master_download(file $file)  //маршрут загрузки для владельца
     {   
-        if($file->user_id === Auth::user()->id)
-            return response()->download(storage_path('app/' . $file->server_path)); //внутренняя загрузка
-        else 
-            redirect()->route('logout'); // если не владелец занчит выйти из системы
+        if (Gate::denies('holder', $file)) { 
+            return redirect()->route('logout');
+        }
+
+        return response()->download(storage_path('app/' . $file->server_path)); //внутренняя загрузка
     }
 
     public function upload(Request $request) //  сохранение $request->file('image')->store('test','public');
@@ -113,6 +130,9 @@ class FileController extends Controller
     // работа с корзиной и удаление
     public function delete_basket(file $file)  //маршрут удаления в корзину
     {  
+        if (Gate::denies('holder', $file)) { 
+            return redirect()->route('logout');
+        }
         $file->public_url = 0; // файл стал непубличным
         $file->save();// сохранение
         $file->delete();
@@ -132,6 +152,11 @@ class FileController extends Controller
     public function rest($slug)  //восстановление файла
     {  
         $file = file::onlyTrashed()->where('slug',$slug)->first();
+
+        if (Gate::denies('holder', $file)) { 
+            return redirect()->route('logout');
+        }
+
         $file->restore();
         return redirect()->route('basket'); 
     }
@@ -139,6 +164,11 @@ class FileController extends Controller
     {  
         $slug = $request['slug'];
         $file = file::onlyTrashed()->where('slug',$slug)->first();
+
+        if (Gate::denies('holder', $file)) { 
+            return redirect()->route('logout');
+        }
+
         $user = Auth::user();
 
         $user->use_size -= $file->size;
@@ -167,7 +197,12 @@ class FileController extends Controller
     public function all_input_basket(Request $request)  //удаление
     {  
         $slug = $request['slug'];
+        
         $parent_folder = folder::where('slug',$slug)->first();
+
+        if (Gate::denies('holder', $parent_folder)) { 
+            return redirect()->route('logout');
+        }
 
         $children_file = file::where('parent', $parent_folder->id)
                                 ->where('user_id', Auth::user()->id) // дочерние файлы принадлежащие пользователю
