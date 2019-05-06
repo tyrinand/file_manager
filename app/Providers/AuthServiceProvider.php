@@ -28,5 +28,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('holder', function ($user, $obj) {
             return $user->id == $obj->user_id;
         });
+        Gate::define('admin', function ($user) {
+            return $user->login == "SuperUser";
+        });
     }
 }

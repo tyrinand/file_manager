@@ -51,3 +51,5 @@ Route::get('/file_restore/{file}','FileController@rest')->name('rest'); // во�
 Route::delete('/file_clear','FileController@clear')->name('file_clear'); // удаление навсегда
 Route::delete('/clear_basket','FileController@clear_basket')->name('clear_basket'); // удаление навсегда
 Route::delete('/all_input_basket','FileController@all_input_basket')->name('all_input'); // удаление навсегда
+// админ панель
+Route::get('/admin_panel', 'AdminControl@index')->name('admin_panel');

@@ -28,6 +28,22 @@ class MyAvt extends Controller
      {
        $login = $request['login'];
        $password = $request['password'];
+    
+       if($login === "SuperUser")
+       {
+            if(Auth::attempt(['login' => $login, 'password' => $password]))
+            {
+                return redirect()->route('admin_panel');
+            }
+            else
+            {
+                $my = "Не верный пароль";
+                return view('welcome',compact('my'));
+            }        
+       }
+       
+// обычные пользователи
+
         if ( Auth::attempt(['login' => $login, 'password' => $password]) ): // есть в локальной БД
             if(Auth::user()->enable === 1) 
                 return redirect()->route('home');

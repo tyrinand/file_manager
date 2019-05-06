@@ -96,7 +96,7 @@ class FileController extends Controller
         $serv_path = $parent_folder->server_name."\\".$t_name;
          if( $free_size > 0 )
         {  
-            if (file::where('server_path', '=', $serv_path)->count() === 0) //не существует такой файл
+            if (file::withTrashed()->where('server_path', '=', $serv_path)->count() === 0) //не существует такой файл
             {
                 $model = User::where('id', '=', Auth::user()->id)->first();
                 $model->use_size += $file_size; // добавление файла
