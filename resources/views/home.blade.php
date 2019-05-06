@@ -10,7 +10,21 @@
                 {{ session('status') }}
               </div>
             @endif
-                <div class="card-header">{{ $folder_title }}</div>
+                <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                  {{ $folder_title }}
+                  @if (($children_file->isNotEmpty()) )
+                    <form class="" action="{{ route('all_input') }}" method="post" onsubmit="if(confirm('Удалить файлы из текущего каталога ?')){return true}else{return false}">
+                      <input type="hidden" name="_method" value="DELETE">
+                      <input type="hidden" name="slug" value="{{ $parent_folder->slug }}">
+                        {{ csrf_field() }}
+                        <button type="submit" class="my-submit-btn">
+                          <div class="all-input-backet modile-icons" title="Удаление файлов из текущего каталога"></div>
+                        </button>
+                      </form>   
+                    @endif
+                </div>
+                </div>
                 @if ( ($children_folder->isNotEmpty()) || ($children_file->isNotEmpty()) )
                     <table class="table table-bordered table-sm my-table table-condensed">
                       <thead>

@@ -10761,6 +10761,14 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.all-input-backet {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/all_delete.svg?9543ab3bac2094f8869f211f9428473a);
+  background-size: cover;
+}
+
 .restore-file {
   display: inline-block;
   width: 30px;

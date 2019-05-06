@@ -153,7 +153,6 @@ class FileController extends Controller
     {  
         $children_file = file::onlyTrashed()->where('user_id',Auth::user()->id)->get();
         // только удаленные и текущего пользователя
-        $total_size = 0;
         $user = Auth::user();
         foreach ($children_file as $file)
             {
@@ -163,5 +162,23 @@ class FileController extends Controller
                 $file->forceDelete(); //удаление объекта
             }
         return redirect()->route('basket')->with('status', 'Корзина очищена');
+    }
+
+    public function all_input_basket(Request $request)  //удаление
+    {  
+        $slug = $request['slug'];
+        $parent_folder = folder::where('slug',$slug)->first();
+
+        $children_file = file::where('parent', $parent_folder->id)
+                                ->where('user_id', Auth::user()->id) // дочерние файлы принадлежащие пользователю
+                                ->get();
+        // только удаленные и текущего пользователя
+        foreach ($children_file as $file)
+            {
+                $file->public_url = 0; // файл стал непубличным
+                $file->save();// сохранение
+                $file->delete();
+            }
+        return redirect()->route('folder_child',$parent_folder)->with('status', 'Файлы перемещены в корзину');
     }
 }
