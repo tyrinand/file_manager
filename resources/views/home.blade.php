@@ -173,7 +173,7 @@
   </a>
 </li>
 <li class="nav-item menu-logo">
-  <a class="nav-link" href="{{ route('basket',$parent_folder) }}" role="button">
+  <a class="nav-link" href="{{ route('basket') }}" role="button">
     <div class="menu-trash" title="Корзина"></div>
   </a>
 </li>

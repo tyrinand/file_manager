@@ -46,4 +46,7 @@ Route::get('/file_download_form/{file}','Download@form')->name('download_form');
 Route::post('/file_download_form_login','Download@form_login')->name('download_form_login'); // маршрут для формы
 //удаление
 Route::delete('/file_delete_basket/{file}','FileController@delete_basket')->name('delete_basket'); // удаление файла в корзину
-Route::get('/file_basket/{folder}', 'FileController@basket_all')->name('basket');
+Route::get('/file_basket', 'FileController@basket_all')->name('basket'); // отображение файлов в корзине
+Route::get('/file_restore/{file}','FileController@rest')->name('rest'); // восстановление файла
+Route::delete('/file_clear','FileController@clear')->name('file_clear'); // удаление навсегда
+Route::delete('/clear_basket','FileController@clear_basket')->name('clear_basket'); // удаление навсегда

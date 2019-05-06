@@ -10,7 +10,28 @@
                 {{ session('status') }}
               </div>
             @endif
-                <div class="card-header">Корзина</div>
+                <div class="card-header">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span>Корзина</span>
+                    @if (($children_file->isNotEmpty()) )
+                    <form class="" action="{{ route('clear_basket') }}" method="post" onsubmit="if(confirm('Очистить?')){return true}else{return false}">
+                      <input type="hidden" name="_method" value="DELETE">
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-danger">
+                          Очистить
+                          @if ($total_size < 1024)
+                            {{ $total_size }} байт
+                         @elseif ($total_size < 1048576)
+                            {{ ceil($total_size/1024) }} КБ
+                         @else
+                            {{ ceil($total_size/1048576) }} МБ
+                          @endif                      
+                          </button>
+                      </form>   
+                    @endif
+                  </div>
+                
+                </div>
                 @if ( ($children_file->isNotEmpty()) )
                     <table class="table table-bordered table-sm my-table table-condensed">
                       <thead>
@@ -56,14 +77,15 @@
                               @endif
                             </td>
                             <td> <!-- действия для файлов -->
-                            <form class="" action="#" method="post" onsubmit="if(confirm('Удалить?')){return true}else{return false}">
+                            <form class="" action="{{ route('file_clear') }}" method="post" onsubmit="if(confirm('Удалить?')){return true}else{return false}">
                                 <input type="hidden" name="_method" value="DELETE">
                                  {{ csrf_field() }}
-                                <a href="#">   <!--  href="{{ route('share',$fl->slug) }}" -->
+                                <input type="hidden" name="slug" value="{{ $fl->slug }}"/> 
+                                <a  href="{{ route('rest',$fl->slug) }}">   <!--  -->
                                     <div class="restore-file modile-icons" title="Восстановить"></div>  
                                 </a>
                                 <button type="submit" class="my-submit-btn">
-                                  <div class="icon-file-delete modile-icons" title="Удалить файл"></div>
+                                  <div class="delete-all-file modile-icons" title="Удалить файл"></div>
                                 </button>
                              </form>   
                             </td> 
@@ -98,14 +120,8 @@
 
 @section('nav-link')
 <li class="nav-item menu-logo">
-<a class="nav-link"
-  @if ($parent_folder->root === 0)
-   href="{{ route('folder_parent',$parent_folder) }}" 
-  @else
-    href="{{ route('root_folder') }}"
-  @endif
-   role="button"> 
-    <div class="menu-folder-up" title="Вверх"></div>
+<a class="nav-link"  href="{{ route('root_folder') }}" role="button">
+    <div class="menu-folder-home" title="Корневой каталог"></div>
   </a>
 </li>
 <li class="nav-item menu-logo">

@@ -119,12 +119,49 @@ class FileController extends Controller
         $parent_folder = folder::find($file->parent);
         return redirect()->route('folder_child',$parent_folder)->with('status', 'Файл перемещен в корзину');
     }
-    public function basket_all(folder $folder)  //маршрут удаления в корзину
+    public function basket_all()  //маршрут удаления в корзину
     {  
         $children_file = file::onlyTrashed()->where('user_id',Auth::user()->id)->get();
         // только удаленные и текущего пользователя
-        $parent_folder =  $folder;
-        return view('file.trash',compact('children_file','parent_folder')); 
-    }
+        $total_size = 0;
+        foreach ($children_file as $file)
+            $total_size +=  $file->size;
 
+        return view('file.trash',compact('children_file', 'total_size')); 
+    }
+    public function rest($slug)  //восстановление файла
+    {  
+        $file = file::onlyTrashed()->where('slug',$slug)->first();
+        $file->restore();
+        return redirect()->route('basket'); 
+    }
+    public function clear(Request $request)  //удаление
+    {  
+        $slug = $request['slug'];
+        $file = file::onlyTrashed()->where('slug',$slug)->first();
+        $user = Auth::user();
+
+        $user->use_size -= $file->size;
+        $user->save(); // уменьшили размер
+        
+        Storage::delete($file->server_path);//удаление файла
+        $file->forceDelete(); //удаление объекта
+
+        return redirect()->route('basket');  
+    }
+    public function clear_basket(Request $request)  //удаление
+    {  
+        $children_file = file::onlyTrashed()->where('user_id',Auth::user()->id)->get();
+        // только удаленные и текущего пользователя
+        $total_size = 0;
+        $user = Auth::user();
+        foreach ($children_file as $file)
+            {
+                $user->use_size -= $file->size;
+                $user->save(); // уменьшили размер
+                Storage::delete($file->server_path);//удаление файла
+                $file->forceDelete(); //удаление объекта
+            }
+        return redirect()->route('basket')->with('status', 'Корзина очищена');
+    }
 }

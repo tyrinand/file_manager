@@ -10769,6 +10769,14 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.delete-all-file {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/delete_files.svg?fdd0262e44a41adb0d31a5ab3676dd33);
+  background-size: cover;
+}
+
 .my-submit-btn {
   background-color: transparent;
   border: 0;
