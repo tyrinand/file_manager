@@ -61,6 +61,10 @@ class AdminControl extends Controller
     }
     public function block_user(User $User)
     {
+        if (Gate::denies('admin')) { 
+            return redirect()->route('logout');
+        }
+
         if($User->enable == 1)
         {
             $User->enable = 0;
@@ -74,5 +78,35 @@ class AdminControl extends Controller
 
         $User->save();
         return redirect()->route('admin_panel')->with('status', $msg);
+    }
+    public function user_size_form(User $User) // изменение размера
+    {
+       if (Gate::denies('admin')) { 
+            return redirect()->route('logout');
+        }
+        $size = $User->size;
+        $max_size = 1000;
+        $min_size = ceil( ( $User->use_size/1048576 ) ) + 1;
+        return view('admin.change_size', compact('size','max_size','min_size','User')); 
+    }
+    public function size_update(Request $request) // изменение размера
+    {
+       if (Gate::denies('admin')) { 
+            return redirect()->route('logout');
+        }
+        $user_id = $request['user'];
+        $size = $request['size_user'];
+        $user = User::where('id', '=', $user_id)->first();
+        $user->size = $size;
+        $user->save();
+
+        return redirect()->route('admin_panel');       
+    }
+    public function admin_delete_all(User $User) 
+    {
+       if (Gate::denies('admin')) { 
+            return redirect()->route('logout');
+        }
+         
     }
 }

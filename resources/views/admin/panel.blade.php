@@ -66,7 +66,7 @@
                                  </a>
                                  @endif
                                 
-                                <a  href="#">   <!--  -->
+                                <a  href="{{ route('user_size_form',$user->id) }}">   <!--  -->
                                     <div class="change-size modile-icons" title="Изменить доступный лимит"></div>  
                                 </a>
                                 <button type="submit" class="my-submit-btn">

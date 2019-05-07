@@ -56,3 +56,9 @@ Route::get('/admin_panel', 'AdminControl@index')->name('admin_panel');
 Route::get('/admin_panel/change_pass', 'AdminControl@password_change')->name('admin_password');//форма для смены пароля
 Route::patch('/admin_panel/password_update','AdminControl@update_pass')->name('pass_update'); //update password
 Route::get('/admin_panel/block_user/{User}','AdminControl@block_user')->name('block_user'); // блокировка пользователя
+Route::get('/admin_panel/user_size_form/{User}','AdminControl@user_size_form')->name('user_size_form'); //форма для измения размера
+Route::patch('/admin_panel/size_update','AdminControl@size_update')->name('size_update'); //update size
+
+
+// полное удаление
+Route::get('/admin_panel/delete_user_file/{User}','AdminControl@admin_delete_all')->name('admin_delete_all'); // блокировка пользователя
