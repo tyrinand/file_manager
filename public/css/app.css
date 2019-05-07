@@ -10668,11 +10668,59 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.menu-admin-panel {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url(/images/admin_panel.svg?d34e5c6e7ffb34367cd8256802b59a1d);
+  background-size: cover;
+}
+
 .menu-upload-files {
   display: inline-block;
   width: 40px;
   height: 40px;
   background-image: url(/images/upload_file.svg?1bf97c70363f9362f0ea91db8b0cf8d7);
+  background-size: cover;
+}
+
+.delete-all-file-admin {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/delete_admin_all.svg?1b6809801808fbc78cc097ef4b08f96a);
+  background-size: cover;
+}
+
+.block-user {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/block_user_block.svg?a37e84a9253eb003d351ac2ec16d2204);
+  background-size: cover;
+}
+
+.unblock-user {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/block_user.svg?655325d16a8cb500f250490c1ce65b08);
+  background-size: cover;
+}
+
+.change-size {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/change_size_user.svg?3cd468f451262aced8e9981fdfe1eeaf);
+  background-size: cover;
+}
+
+.menu-change-password {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url(/images/change_password.svg?d0fb0188e9712624975b8f53cb5e868c);
   background-size: cover;
 }
 

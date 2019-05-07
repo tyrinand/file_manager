@@ -53,3 +53,6 @@ Route::delete('/clear_basket','FileController@clear_basket')->name('clear_basket
 Route::delete('/all_input_basket','FileController@all_input_basket')->name('all_input'); // удаление навсегда
 // админ панель
 Route::get('/admin_panel', 'AdminControl@index')->name('admin_panel');
+Route::get('/admin_panel/change_pass', 'AdminControl@password_change')->name('admin_password');//форма для смены пароля
+Route::patch('/admin_panel/password_update','AdminControl@update_pass')->name('pass_update'); //update password
+Route::get('/admin_panel/block_user/{User}','AdminControl@block_user')->name('block_user'); // блокировка пользователя

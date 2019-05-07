@@ -19,11 +19,53 @@
   background-image:url(../img/add_folder.svg);
   background-size: cover;
 }
+.menu-admin-panel{
+  display: inline-block;
+  width:40px;
+  height: 40px;
+  background-image:url(../img/admin_panel.svg);
+  background-size: cover;
+}
 .menu-upload-files{
   display: inline-block;
   width:40px;
   height: 40px;
   background-image:url(../img/upload_file.svg);
+  background-size: cover;
+}
+.delete-all-file-admin{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/delete_admin_all.svg);
+  background-size: cover;
+}
+.block-user{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/block_user_block.svg);
+  background-size: cover;
+}
+.unblock-user{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/block_user.svg);
+  background-size: cover;
+}
+.change-size{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/change_size_user.svg);
+  background-size: cover;
+}
+.menu-change-password{
+  display: inline-block;
+  width:40px;
+  height: 40px;
+  background-image:url(../img/change_password.svg);
   background-size: cover;
 }
 .flex-progress{

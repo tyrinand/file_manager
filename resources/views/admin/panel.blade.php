@@ -12,8 +12,8 @@
             @endif
                 <div class="card-header">
                   <div class="d-flex justify-content-between align-items-center">
-                    <span>Кол-во пользователей: {{$count_user}}</span>
-                    <span>Использовано:
+                    <span class="my-table">Кол-во пользователей: {{$count_user}}</span>
+                    <span class=my-table>Использовано:
                                 @if ( $use_size_total< 1024)
                                     {{ $use_size_total }} байт
                                 @elseif ( $use_size_total < 1048576)
@@ -53,14 +53,24 @@
                                 {{ $user->size }} МБ
                             </td>
                             <td> <!-- действия для файлов -->
-                            <form class="" action="#" method="post" onsubmit="if(confirm('Удалить?')){return true}else{return false}">
+                            <form class="" action="#" method="post" onsubmit="if(confirm('Удалить все файлы пользователя?')){return true}else{return false}">
                                 <input type="hidden" name="_method" value="DELETE">
                                  {{ csrf_field() }}
+                                 @if ( $user->enable == 0 )
+                                 <a  href="{{ route('block_user',$user->id) }}">   <!--  -->
+                                    <div class="block-user modile-icons" title="Открыть доступ"></div>  
+                                 </a>
+                                 @else
+                                 <a  href="{{ route('block_user',$user->id) }}">   <!--  -->
+                                    <div class="unblock-user modile-icons" title="Закрыть доступ"></div>  
+                                 </a>
+                                 @endif
+                                
                                 <a  href="#">   <!--  -->
-                                    <div class="restore-file modile-icons" title="Восстановить"></div>  
+                                    <div class="change-size modile-icons" title="Изменить доступный лимит"></div>  
                                 </a>
                                 <button type="submit" class="my-submit-btn">
-                                  <div class="delete-all-file modile-icons" title="Удалить файл"></div>
+                                  <div class="delete-all-file-admin modile-icons" title="Удалить все файлы пользователя"></div>
                                 </button>
                              </form>   
                             </td> 
@@ -83,8 +93,13 @@
 
 @section('nav-link')
 <li class="nav-item menu-logo">
-<a class="nav-link"  href="#" role="button">
-    <div class="menu-folder-home" title="Изменить пароль"></div>
+<a class="nav-link"  href="{{ route('admin_panel') }}" role="button">
+    <div class="menu-admin-panel" title="Админ. панель"></div>
+  </a>
+</li>
+<li class="nav-item menu-logo">
+<a class="nav-link"  href="{{ route('admin_password') }}" role="button">
+    <div class="menu-change-password" title="Изменить пароль"></div>
   </a>
 </li>
 <li class="nav-item menu-logo">
