@@ -13,7 +13,10 @@
 
 Route::get('/', function () {
     if (!empty(Auth::user()))
-        return redirect()->route('home');
+        if(Auth::user()->login === 'SuperUser')
+            return redirect()->route('admin_panel');
+        else
+            return redirect()->route('home');
     else
         return view('welcome');
 });

@@ -107,6 +107,13 @@ class AdminControl extends Controller
        if (Gate::denies('admin')) { 
             return redirect()->route('logout');
         }
-         
+    
+        $files = file::where('user_id', $User->id )->get(['slug']);
+        $count_file = $files->count();
+
+        $folders = folder::where('user_id', $User->id )->where('root', '0')->get(['slug']);
+        $count_folder = $folders->count();
+        
+        return view('admin.delete_all', compact('files','folders','count_folder','count_file')); 
     }
 }
