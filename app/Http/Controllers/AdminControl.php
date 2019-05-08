@@ -108,12 +108,15 @@ class AdminControl extends Controller
             return redirect()->route('logout');
         }
     
+        $user_login = $User->login;
+        $user_size = $User->use_size;
+
         $files = file::where('user_id', $User->id )->get(['slug']);
         $count_file = $files->count();
 
         $folders = folder::where('user_id', $User->id )->where('root', '0')->get(['slug']);
         $count_folder = $folders->count();
         
-        return view('admin.delete_all', compact('files','folders','count_folder','count_file')); 
+        return view('admin.delete_all', compact('files','folders','count_folder','count_file','user_login','user_size')); 
     }
 }
