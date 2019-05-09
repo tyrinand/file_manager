@@ -65,3 +65,7 @@ Route::patch('/admin_panel/size_update','AdminControl@size_update')->name('size_
 
 // полное удаление
 Route::get('/admin_panel/delete_user_file/{User}','AdminControl@admin_delete_all')->name('admin_delete_all'); // блокировка пользователя
+// маршруты удаления папок и файлов
+Route::delete('/admin_panel/delete_user_file/{file}','AdminControl@admin_delete_file')->name('admin_delete_file'); // удаление файла пользователя
+Route::delete('/admin_panel/block_user/{User}','AdminControl@admin_block_user')->name('admin_block_user'); // блокирование пользователя
+Route::delete('/admin_panel/delete_user_folder/{folder}','AdminControl@admin_delete_folder')->name('admin_delete_folder');

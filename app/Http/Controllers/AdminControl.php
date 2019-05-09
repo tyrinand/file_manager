@@ -111,7 +111,7 @@ class AdminControl extends Controller
         $user_login = $User->login;
         $user_size = $User->use_size;
 
-        $files = file::where('user_id', $User->id )->get(['slug']);
+        $files = file::withTrashed()->where('user_id', $User->id )->get(['slug','size']);
         $count_file = $files->count();
 
         $folders = folder::where('user_id', $User->id )->where('root', '0')->get(['slug']);
@@ -119,4 +119,44 @@ class AdminControl extends Controller
         
         return view('admin.delete_all', compact('files','folders','count_folder','count_file','user_login','user_size')); 
     }
+    public function admin_delete_file($slug) 
+    {
+        if (Gate::denies('admin')) { 
+            return ['result' => false ]; // аякс запрос редирект не возможен
+        }
+
+        $file = file::withTrashed()->where('slug', $slug)->first();
+
+        $user = User::where('id', $file->user_id )->first();
+
+        $user->use_size -= $file->size;
+        $user->save(); 
+        Storage::delete($file->server_path);
+        $file->forceDelete();
+
+        return ['result' => true];
+    }
+    public function admin_block_user($login) 
+    {
+        if (Gate::denies('admin')) { 
+            return response(401); // аякс запрос редирект не возможен
+        }
+
+        $User = User::where('login', $login )->first();
+
+        $User->enable = 0;
+        $User->save();
+        return response(200);
+    }
+    public function admin_delete_folder(folder $folder) 
+    {
+        if (Gate::denies('admin')) { 
+            return response(401); // аякс запрос редирект не возможен
+        }
+
+        Storage::deleteDirectory($folder->server_name);
+        $folder->delete();
+
+        return response(200);
+    }        
 }

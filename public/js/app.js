@@ -1775,6 +1775,26 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1813,14 +1833,281 @@ __webpack_require__.r(__webpack_exports__);
   name: "my-delete",
   data: function data() {
     return {
-      fileProgress: 0
+      Progress: 0,
+      allObjts: 0,
+      title: "",
+      countDelete: 0
     };
   },
   props: ['folders', 'files', 'user', 'usize', 'count_folder', 'count_file'],
   methods: {
-    delete_obj: function delete_obj() {
-      if (confirm("Удалить и заблокировать пользователя?")) {} else alert("Вы отменили удаление");
-    }
+    delete_obj: function () {
+      var _delete_obj = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, item, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, _item;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.allObjts = this.count_folder + this.count_file;
+
+                if (!confirm("Удалить и заблокировать пользователя?")) {
+                  _context.next = 62;
+                  break;
+                }
+
+                if (!(this.allObjts > 0)) {
+                  _context.next = 59;
+                  break;
+                }
+
+                _context.next = 5;
+                return this.blockUser(this.user);
+
+              case 5:
+                _iteratorNormalCompletion = true;
+                _didIteratorError = false;
+                _iteratorError = undefined;
+                _context.prev = 8;
+                _iterator = this.files[Symbol.iterator]();
+
+              case 10:
+                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                  _context.next = 17;
+                  break;
+                }
+
+                item = _step.value;
+                _context.next = 14;
+                return this.deletefile(item);
+
+              case 14:
+                _iteratorNormalCompletion = true;
+                _context.next = 10;
+                break;
+
+              case 17:
+                _context.next = 23;
+                break;
+
+              case 19:
+                _context.prev = 19;
+                _context.t0 = _context["catch"](8);
+                _didIteratorError = true;
+                _iteratorError = _context.t0;
+
+              case 23:
+                _context.prev = 23;
+                _context.prev = 24;
+
+                if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+                  _iterator["return"]();
+                }
+
+              case 26:
+                _context.prev = 26;
+
+                if (!_didIteratorError) {
+                  _context.next = 29;
+                  break;
+                }
+
+                throw _iteratorError;
+
+              case 29:
+                return _context.finish(26);
+
+              case 30:
+                return _context.finish(23);
+
+              case 31:
+                // функция по удалению файлов
+                _iteratorNormalCompletion2 = true;
+                _didIteratorError2 = false;
+                _iteratorError2 = undefined;
+                _context.prev = 34;
+                _iterator2 = this.folders[Symbol.iterator]();
+
+              case 36:
+                if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
+                  _context.next = 43;
+                  break;
+                }
+
+                _item = _step2.value;
+                _context.next = 40;
+                return this.deletefolder(_item);
+
+              case 40:
+                _iteratorNormalCompletion2 = true;
+                _context.next = 36;
+                break;
+
+              case 43:
+                _context.next = 49;
+                break;
+
+              case 45:
+                _context.prev = 45;
+                _context.t1 = _context["catch"](34);
+                _didIteratorError2 = true;
+                _iteratorError2 = _context.t1;
+
+              case 49:
+                _context.prev = 49;
+                _context.prev = 50;
+
+                if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+                  _iterator2["return"]();
+                }
+
+              case 52:
+                _context.prev = 52;
+
+                if (!_didIteratorError2) {
+                  _context.next = 55;
+                  break;
+                }
+
+                throw _iteratorError2;
+
+              case 55:
+                return _context.finish(52);
+
+              case 56:
+                return _context.finish(49);
+
+              case 57:
+                _context.next = 60;
+                break;
+
+              case 59:
+                alert('Нет объектов для удаления!!!');
+
+              case 60:
+                _context.next = 63;
+                break;
+
+              case 62:
+                alert("Вы отменили удаление");
+
+              case 63:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[8, 19, 23, 31], [24,, 26, 30], [34, 45, 49, 57], [50,, 52, 56]]);
+      }));
+
+      function delete_obj() {
+        return _delete_obj.apply(this, arguments);
+      }
+
+      return delete_obj;
+    }(),
+    deletefile: function () {
+      var _deletefile = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(item) {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios["delete"]('/admin_panel/delete_user_file/' + item.slug).then(function (response) {
+                  if (response.data.result) {
+                    _this.count_file--;
+                    _this.usize -= item.size;
+                    _this.countDelete++;
+                    _this.Progress = Math.round(_this.countDelete / _this.allObjts * 100);
+                    _this.title = _this.countDelete + "/" + _this.allObjts;
+                    console.log(response.data.user);
+                  } else {
+                    console.log('Error');
+                  }
+                })["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function deletefile(_x) {
+        return _deletefile.apply(this, arguments);
+      }
+
+      return deletefile;
+    }(),
+    blockUser: function () {
+      var _blockUser = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(login) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios["delete"]('/admin_panel/block_user/' + this.user).then(function (response) {})["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function blockUser(_x2) {
+        return _blockUser.apply(this, arguments);
+      }
+
+      return blockUser;
+    }(),
+    deletefolder: function () {
+      var _deletefolder = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(item) {
+        var _this2 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios["delete"]('/admin_panel/delete_user_folder/' + item.slug).then(function (response) {
+                  _this2.count_folder--;
+                  _this2.countDelete++;
+                  _this2.Progress = Math.round(_this2.countDelete / _this2.allObjts * 100);
+                  _this2.title = _this2.countDelete + "/" + _this2.allObjts;
+                })["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }));
+
+      function deletefolder(_x3) {
+        return _deletefolder.apply(this, arguments);
+      }
+
+      return deletefolder;
+    }()
   }
 });
 
@@ -37970,67 +38257,120 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "card-header" }, [
-      _c(
-        "div",
-        { staticClass: "d-flex justify-content-between align-items-center" },
-        [
-          _c("span", { staticClass: "my-table" }, [
-            _vm._v("Пользователь: " + _vm._s(_vm.user))
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "my-table" }, [
-            _vm._v("Использовано: " + _vm._s(_vm.usize) + "\n      ")
-          ])
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-6 col-md-4" }, [
-        _c("br"),
-        _vm._v(" "),
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "card-header" }, [
         _c(
-          "table",
-          {
-            staticClass:
-              "table table-bordered table-sm my-table table-condensed"
-          },
+          "div",
+          { staticClass: "d-flex justify-content-between align-items-center" },
           [
-            _c("thead"),
+            _c("span", { staticClass: "my-table" }, [
+              _vm._v("Пользователь: " + _vm._s(_vm.user))
+            ]),
             _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c("td", [_vm._v("Кол-во папок")]),
+            _vm.usize / 1024 < 1024
+              ? _c("span", { staticClass: "file-title-upload" }, [
+                  _vm._v(
+                    " Использовано: " +
+                      _vm._s((_vm.usize / 1024).toFixed(2)) +
+                      "Kb"
+                  )
+                ])
+              : _c("span", { staticClass: "file-title-upload" }, [
+                  _vm._v(
+                    " Использовано: " +
+                      _vm._s((_vm.usize / 1048576).toFixed(2)) +
+                      "Mb"
+                  )
+                ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm.Progress > 0
+        ? [
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _c("div", { staticClass: "col-10" }, [
+                _c("br"),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(_vm.count_folder))])
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("td", [_vm._v("Кол-во файлов")]),
-                _vm._v(" "),
-                _c("td", [_vm._v(" " + _vm._s(_vm.count_file))])
+                _c(
+                  "div",
+                  { staticClass: "progress", staticStyle: { height: "40px" } },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "progress-bar",
+                        style: { width: _vm.Progress + "%" },
+                        attrs: {
+                          role: "progressbar",
+                          "aria-valuenow": "25",
+                          "aria-valuemin": "0",
+                          "aria-valuemax": "100"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                Удалено : " +
+                            _vm._s(_vm.title) +
+                            "\n              "
+                        )
+                      ]
+                    )
+                  ]
+                )
               ])
             ])
           ]
-        )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-6 col-md-4" }, [
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "table",
+            {
+              staticClass:
+                "table table-bordered table-sm my-table table-condensed"
+            },
+            [
+              _c("thead"),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c("td", [_vm._v("Кол-во папок")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.count_folder))])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("td", [_vm._v("Кол-во файлов")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(_vm.count_file))])
+                ])
+              ])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-6 col-md-4" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-block btn-danger",
+              on: { click: _vm.delete_obj }
+            },
+            [_vm._v("Удалить объекты")]
+          )
+        ])
       ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-6 col-md-4" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-block btn-danger",
-            on: { click: _vm.delete_obj }
-          },
-          [_vm._v("Удалить объекты")]
-        )
-      ])
-    ])
-  ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
