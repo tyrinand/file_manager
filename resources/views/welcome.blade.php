@@ -16,7 +16,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">Логин</label>
+                            <label for="email" class="col-md-3 col-form-label text-md-right">Логин</label>
 
                             <div class="col-md-6">
                                 <input id="login" type="text" class="form-control @isset($my) {{'is-invalid'}} @endisset" name="login" value="{{ old('login') }}" required autofocus>
@@ -24,8 +24,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Пароль</label>
+                        <div class="form-group row ">
+                            <label for="password" class="col-md-3 col-form-label text-md-right">Пароль</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @isset($my) {{'is-invalid'}} @endisset"
@@ -42,9 +42,9 @@
                         </div>
 
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="form-group row mb-0 justify-content-center">
+                            <div class="col-md-3 ">
+                                <button type="submit" class="btn btn-primary form-control">
                                         Войти
                                 </button>
                             </div>

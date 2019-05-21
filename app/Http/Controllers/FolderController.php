@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Gate;
+use Illuminate\Support\Facades\DB;
 
 
 class FolderController extends Controller
@@ -147,6 +148,32 @@ class FolderController extends Controller
         // foldername for title
         $folder_title = $root_users->title; // заголовок
         $parent_folder = $root_users; // родительский каталог
+        return view('home', compact('children_folder','folder_title','parent_folder','children_file')); 
+    }
+    public function serch_str(Request $request)
+    {
+        $fl_slug = $request['parent_folder'];
+        $str_find = $request['str_find'];
+
+        $parent_folder = folder::where('slug', $fl_slug)->first();
+
+        if (Gate::denies('holder', $parent_folder)) {
+            return redirect()->route('logout');
+        }
+        
+        $children_folder = DB::table('folders')
+                ->where('user_name', 'like', "$str_find%")
+                ->where('user_id', $parent_folder->user_id)
+                ->get();
+
+        $children_file = DB::table('files')
+                ->where('user_name', 'like', "$str_find%")
+                ->where('user_id', $parent_folder->user_id)
+                ->get(); 
+        if($children_folder->isEmpty() && $children_file->isEmpty()) 
+            return view('folder.empty',compact('parent_folder'));
+            
+        $folder_title = "Результаты поиска";
         return view('home', compact('children_folder','folder_title','parent_folder','children_file')); 
     }
 }

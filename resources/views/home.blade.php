@@ -29,7 +29,21 @@
                     <table class="table table-bordered table-sm my-table table-condensed">
                       <thead>
                         <tr>
-                          <th>Имя</th>
+                          <th>
+                            <div class="my-wrap-find-string"> <!-- поиск по файлам и папкам -->
+                                <form class="search" action="{{ route('serch_str') }}" method="POST"> 
+                                {{ csrf_field() }}  
+                                <input type="hidden" name="parent_folder" value="{{ $parent_folder->slug }}"/>
+                                  <section class="flexbox">
+                                    <span class="input-find-caption">Имя</span>
+                                    <div class="input-class">
+                                      <input type="text" name="str_find" required value="@if(!empty($str_find)){{$str_find}}@endif"/>
+                                      <button class="btn-sm btn btn-primary my-btn-find-string" type="submit" name="button"></button>
+                                    </div>
+                                  </section>
+                                </form>
+                            </div> <!-- поиск по файлам и папкам --> 
+                          </th>
                           <th class="d-none d-md-table-cell">Дата создания</th>
                           <th>Размер</th>
                           <th>Действия</th>

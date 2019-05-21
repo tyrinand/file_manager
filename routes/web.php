@@ -69,3 +69,5 @@ Route::get('/admin_panel/delete_user_file/{User}','AdminControl@admin_delete_all
 Route::delete('/admin_panel/delete_user_file/{file}','AdminControl@admin_delete_file')->name('admin_delete_file'); // удаление файла пользователя
 Route::delete('/admin_panel/block_user/{User}','AdminControl@admin_block_user')->name('admin_block_user'); // блокирование пользователя
 Route::delete('/admin_panel/delete_user_folder/{folder}','AdminControl@admin_delete_folder')->name('admin_delete_folder');
+//поиск
+Route::post('/serch','FolderController@serch_str')->name('serch_str');
