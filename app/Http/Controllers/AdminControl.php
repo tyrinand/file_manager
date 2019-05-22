@@ -9,6 +9,7 @@ use App\User;
 use App\file;
 use Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class AdminControl extends Controller
 {
@@ -18,7 +19,7 @@ class AdminControl extends Controller
             return redirect()->route('logout');
         }
 
-        $users = User::where('login', '<>', 'SuperUser')->paginate(3);
+        $users = User::where('login', '<>', 'SuperUser')->paginate(25);
         $count_user = $users->count();
         $use_size_total = $users->sum('use_size');
         return view('admin.panel', compact('users','count_user','use_size_total')); 
@@ -159,4 +160,28 @@ class AdminControl extends Controller
 
         return response(200);
     }        
+    public function serch_login(Request $request) // написание контроллера
+    {
+       if (Gate::denies('admin')) { 
+            return redirect()->route('logout');
+        }
+        $str_find_login = $request['str_find_login'];
+
+        //$users_all = User::where('login', '<>', 'SuperUser')->paginate(25);
+
+        $users = DB::table('users')
+            ->where('login', 'like', "$str_find_login%")
+            ->paginate(25);
+
+        if($users->isEmpty())
+        {
+            return view('admin.empty');
+        }
+        else
+        {
+            $count_user = $users->count();
+            $use_size_total = $users->sum('use_size');
+            return view('admin.panel', compact('users','count_user','use_size_total')); 
+        }
+    }
 }

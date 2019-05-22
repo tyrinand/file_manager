@@ -71,3 +71,4 @@ Route::delete('/admin_panel/block_user/{User}','AdminControl@admin_block_user')-
 Route::delete('/admin_panel/delete_user_folder/{folder}','AdminControl@admin_delete_folder')->name('admin_delete_folder');
 //поиск
 Route::post('/serch','FolderController@serch_str')->name('serch_str');
+Route::post('admin_panel/serch_login','AdminControl@serch_login')->name('serch_login');

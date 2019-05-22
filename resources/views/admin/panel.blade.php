@@ -28,7 +28,20 @@
                     <table class="table table-bordered table-sm my-table table-condensed">
                       <thead>
                         <tr>
-                          <th>Логин</th>
+                          <th>
+                          <div class="my-wrap-find-string"> <!-- поиск по логину -->
+                                <form class="search" action="{{ route('serch_login') }}" method="POST"> 
+                                {{ csrf_field() }}  
+                                  <section class="flexbox">
+                                    <span class="input-find-caption">Логин</span>
+                                    <div class="input-class">
+                                      <input type="text" name="str_find_login" required value="@if(!empty($str_find_login)){{$str_find_login}}@endif"/>
+                                      <button class="btn-sm btn btn-primary my-btn-find-string" type="submit" name="button"></button>
+                                    </div>
+                                  </section>
+                                </form>
+                            </div> <!-- поиск по логину --> 
+                          </th>
                           <th class="d-none d-md-table-cell">Использовано</th>
                           <th>Лимит</th>
                           <th>Действия</th>

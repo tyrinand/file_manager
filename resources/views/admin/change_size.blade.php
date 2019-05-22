@@ -58,7 +58,7 @@
   </a>
 </li>
 <li class="nav-item menu-logo">
-<a class="nav-link"  href="#" role="button">
+<a class="nav-link"  href="{{ route('admin_password') }}" role="button">
     <div class="menu-change-password" title="Изменить пароль"></div>
   </a>
 </li>

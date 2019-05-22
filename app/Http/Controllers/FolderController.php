@@ -174,6 +174,6 @@ class FolderController extends Controller
             return view('folder.empty',compact('parent_folder'));
             
         $folder_title = "Результаты поиска";
-        return view('home', compact('children_folder','folder_title','parent_folder','children_file')); 
+        return view('home', compact('children_folder','folder_title','parent_folder','children_file','str_find')); 
     }
 }
