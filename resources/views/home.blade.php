@@ -85,6 +85,9 @@
                                 <a href="{{ route('folder_edit',$fl->slug) }}">  
                                     <div class="folder-edit modile-icons" title="Переименовать папку"></div>  
                                 </a>
+                                <a href="{{ route('public_folder',$fl->slug) }}">  
+                                    поиск дочерних  
+                                </a>
                               </form>
                             </td> 
                           </tr>
@@ -203,6 +206,11 @@
 <li class="nav-item menu-logo">
   <a class="nav-link" href="{{ route('basket') }}" role="button">
     <div class="menu-trash" title="Корзина"></div>
+  </a>
+</li>
+<li class="nav-item menu-logo">
+  <a class="nav-link" href="{{ route('user_group') }}" role="button">
+    <div class="menu-grop" title="Группы"></div>
   </a>
 </li>
 @endsection

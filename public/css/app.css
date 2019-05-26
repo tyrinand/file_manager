@@ -10857,6 +10857,22 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.share-group {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url(/images/group_share.svg?ccfd5515f2959cf4037d60af732b3a03);
+  background-size: cover;
+}
+
+.delete-group {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url(/images/delete_upload.svg?441d8611106ab6473ed8c5487cda63ac);
+  background-size: cover;
+}
+
 .share-file {
   display: inline-block;
   width: 30px;
@@ -10902,6 +10918,14 @@ a.text-dark:focus {
   width: 40px;
   height: 40px;
   background-image: url(/images/trash.svg?1534c86ee501c9302e862706a39f8333);
+  background-size: cover;
+}
+
+.menu-grop {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url(/images/group.svg?02f9d15d959050ed6a4583a98e0eafc6);
   background-size: cover;
 }
 

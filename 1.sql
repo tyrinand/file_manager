@@ -33,9 +33,18 @@ CREATE TABLE IF NOT EXISTS `files` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `files_slug_unique` (`slug`),
   UNIQUE KEY `files_server_path_unique` (`server_path`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Экспортируемые данные не выделены.
+-- Дамп данных таблицы cloud3.files: ~5 rows (приблизительно)
+/*!40000 ALTER TABLE `files` DISABLE KEYS */;
+INSERT INTO `files` (`id`, `created_at`, `updated_at`, `user_id`, `user_name`, `size`, `server_name`, `server_path`, `parent`, `slug`, `deleted_at`, `public_url`) VALUES
+	(2, '2019-05-24 20:06:09', '2019-05-24 20:06:09', 1, '1.docx', 16988, '1.docx', 'public\\tyrinand\\11\\12\\15\\1.docx', 15, '3306eb2c-c747-4510-9a7a-76596729ae04', NULL, 0),
+	(3, '2019-05-24 20:06:30', '2019-05-24 20:06:30', 1, '2.docx', 16481, '2.docx', 'public\\tyrinand\\11\\13\\2.docx', 13, '8c846baa-c0dd-4007-889c-1140e911fed3', NULL, 0),
+	(4, '2019-05-24 20:06:45', '2019-05-24 20:06:45', 1, '3.docx', 23032, '3.docx', 'public\\tyrinand\\11\\14\\3.docx', 14, 'e6d73fac-6130-4209-b0c4-7980e8e0153c', NULL, 0),
+	(5, '2019-05-24 20:06:56', '2019-05-24 20:06:56', 1, '1.docx', 16988, '1.docx', 'public\\tyrinand\\11\\1.docx', 11, '893ad8b0-cc53-4b72-ac43-beb5af4ac4f5', NULL, 0),
+	(6, '2019-05-24 21:28:32', '2019-05-24 21:28:32', 1, '2.docx', 16481, '2.docx', 'public\\tyrinand\\11\\12\\2.docx', 12, 'd4eb75aa-d1b3-4a33-b461-75f93fbeafab', NULL, 0);
+/*!40000 ALTER TABLE `files` ENABLE KEYS */;
+
 -- Дамп структуры для таблица cloud3.folders
 CREATE TABLE IF NOT EXISTS `folders` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -50,18 +59,71 @@ CREATE TABLE IF NOT EXISTS `folders` (
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `folders_slug_unique` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Экспортируемые данные не выделены.
+-- Дамп данных таблицы cloud3.folders: ~11 rows (приблизительно)
+/*!40000 ALTER TABLE `folders` DISABLE KEYS */;
+INSERT INTO `folders` (`id`, `user_name`, `user_id`, `server_name`, `root`, `parent`, `slug`, `created_at`, `updated_at`, `title`) VALUES
+	(1, 'public\\tyrinand', 1, 'public\\tyrinand', 1, NULL, 'de21efbf-e555-4536-8744-2a6cd607a549', '2019-05-04 15:48:44', '2019-05-04 15:48:44', 'tyrinand'),
+	(6, 'public\\SuperUser', 3, 'public\\SuperUser', 1, NULL, '34502309-8208-457f-b48b-e6b252b68230', '2019-05-06 14:22:33', '2019-05-06 14:22:33', 'SuperUser'),
+	(7, '6545656', 1, 'public\\tyrinand\\7', 0, 1, '26c6928c-6a64-425d-b10a-f0d13efd98f3', '2019-05-21 16:01:11', '2019-05-21 16:01:11', 'tyrinand\\6545656'),
+	(8, '3TApBO', 1, 'public\\tyrinand\\8', 0, 1, 'b2266cdf-0f25-436c-90a6-3cc85c7f2bfd', '2019-05-21 17:40:25', '2019-05-21 17:40:25', 'tyrinand\\3TApBO'),
+	(9, 'public\\AVTyurin', 4, 'public\\AVTyurin', 1, NULL, 'bc5793fd-6e7b-4c89-ad60-682fc7fdf00e', '2019-05-22 09:40:07', '2019-05-22 09:40:07', 'AVTyurin'),
+	(10, '1', 4, 'public\\AVTyurin\\10', 0, 9, 'f0ca2962-cb14-4a41-8789-4af3950d6f1d', '2019-05-22 09:40:19', '2019-05-22 09:40:19', 'AVTyurin\\1'),
+	(11, 'диплом', 1, 'public\\tyrinand\\11', 0, 1, '982b279e-82b6-43ed-98ea-20cbfbb7efdb', '2019-05-24 20:05:08', '2019-05-24 20:05:08', 'tyrinand\\диплом'),
+	(12, 'пояснительная записка', 1, 'public\\tyrinand\\11\\12', 0, 11, 'fc9ce1b2-fa52-4712-b148-5381e901b938', '2019-05-24 20:05:21', '2019-05-24 20:05:21', 'tyrinand\\диплом\\пояснительная записка'),
+	(13, 'техническое задание', 1, 'public\\tyrinand\\11\\13', 0, 11, '1b46d773-dd26-4ea9-a59f-a9a479d41668', '2019-05-24 20:05:34', '2019-05-24 20:05:34', 'tyrinand\\диплом\\техническое задание'),
+	(14, 'код программы', 1, 'public\\tyrinand\\11\\14', 0, 11, 'b1bcb37f-cd77-477f-91c6-e38bde134ce4', '2019-05-24 20:05:45', '2019-05-24 20:05:45', 'tyrinand\\диплом\\код программы'),
+	(15, 'кек', 1, 'public\\tyrinand\\11\\12\\15', 0, 12, '4f8cb875-c459-4360-80e8-7fd90e81844b', '2019-05-24 20:05:55', '2019-05-24 20:05:55', 'tyrinand\\диплом\\пояснительная записка\\кек');
+/*!40000 ALTER TABLE `folders` ENABLE KEYS */;
+
+-- Дамп структуры для таблица cloud3.groups
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `user_login` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `public_folder_count` int(10) unsigned NOT NULL,
+  `user_sub_count` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `groups_slug_unique` (`slug`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Дамп данных таблицы cloud3.groups: ~2 rows (приблизительно)
+/*!40000 ALTER TABLE `groups` DISABLE KEYS */;
+INSERT INTO `groups` (`id`, `title`, `user_id`, `user_login`, `slug`, `created_at`, `updated_at`, `public_folder_count`, `user_sub_count`) VALUES
+	(1, '455', 1, 'tyrinand', 'eeb2c7a0-3403-4488-9d74-2b947f076dd4', '2019-05-26 14:36:14', '2019-05-26 18:58:07', 0, 1),
+	(2, 'первая группа', 1, 'tyrinand', 'bc110ec4-ac3d-4739-858e-2deef0a27837', '2019-05-26 15:49:04', '2019-05-26 15:49:04', 0, 0);
+/*!40000 ALTER TABLE `groups` ENABLE KEYS */;
+
 -- Дамп структуры для таблица cloud3.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Экспортируемые данные не выделены.
+-- Дамп данных таблицы cloud3.migrations: ~12 rows (приблизительно)
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+	(1, '2014_10_12_000000_create_users_table', 1),
+	(2, '2014_10_12_100000_create_password_resets_table', 1),
+	(3, '2019_04_08_124603_add_use_size', 1),
+	(4, '2019_04_09_091039_create_folders_table', 1),
+	(5, '2019_04_09_192202_add_col', 1),
+	(6, '2019_04_14_182912_create_files_table', 1),
+	(7, '2019_05_03_123718_add_dete_file_col', 2),
+	(8, '2019_05_04_154636_public_url', 3),
+	(9, '2019_05_06_131621_set_uniqie_server_path', 4),
+	(10, '2019_05_26_120052_create_groups_table', 5),
+	(11, '2019_05_26_154119_add_public_count', 6),
+	(12, '2019_05_26_172130_create_sub_users_table', 7);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+
 -- Дамп структуры для таблица cloud3.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -70,7 +132,27 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Экспортируемые данные не выделены.
+-- Дамп данных таблицы cloud3.password_resets: ~0 rows (приблизительно)
+/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
+
+-- Дамп структуры для таблица cloud3.sub_users
+CREATE TABLE IF NOT EXISTS `sub_users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `group_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Дамп данных таблицы cloud3.sub_users: ~2 rows (приблизительно)
+/*!40000 ALTER TABLE `sub_users` DISABLE KEYS */;
+INSERT INTO `sub_users` (`id`, `user_id`, `group_id`, `created_at`, `updated_at`) VALUES
+	(1, 1, 1, '2019-05-26 18:33:30', '2019-05-26 18:33:30'),
+	(2, 4, 1, '2019-05-26 18:58:07', '2019-05-26 18:58:07');
+/*!40000 ALTER TABLE `sub_users` ENABLE KEYS */;
+
 -- Дамп структуры для таблица cloud3.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -86,9 +168,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_login_unique` (`login`),
   UNIQUE KEY `users_path_unique` (`path`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Экспортируемые данные не выделены.
+-- Дамп данных таблицы cloud3.users: ~3 rows (приблизительно)
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `login`, `path`, `enable`, `size`, `password`, `remember_token`, `created_at`, `updated_at`, `use_size`) VALUES
+	(1, 'tyrinand', 'public\\tyrinand', 1, 100, '$2y$10$ROIQaIQ907QEyga6dl4AZ.QdE74fE09j582ikU.GDqL7Fht8xyICu', NULL, '2019-05-04 15:48:43', '2019-05-26 18:03:02', 89970),
+	(3, 'SuperUser', 'public\\SuperUser', 1, 250, '$2y$10$/CS9xfTFaFpE2IE9hrTKQum9Ha7kPdi660RrFIKjuzc/DmU9Fq7Nm', NULL, '2019-05-06 14:22:32', '2019-05-07 11:49:39', 0),
+	(4, 'AVTyurin', 'public\\AVTyurin', 1, 250, '$2y$10$Op7sQT1qKo1QH0bwAc5yCeveZrDQM6eYDgOT4Lv4hLWWKX3hna2fa', NULL, '2019-05-22 09:40:07', '2019-05-22 09:40:07', 0);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

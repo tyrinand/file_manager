@@ -179,6 +179,20 @@
   background-image:url(../img/rename_folder.svg);
   background-size: cover;
 }
+.share-group{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image:url(../img/group_share.svg);
+  background-size: cover;
+}
+.delete-group{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image:url(../img/delete_upload.svg);
+  background-size: cover;
+}
 .share-file{
   display: inline-block;
   width: 30px;
@@ -220,6 +234,13 @@
   width:  40px;
   height: 40px;
   background-image:url(../img/trash.svg);
+  background-size: cover;
+}
+.menu-grop{
+  display: inline-block;
+  width:  40px;
+  height: 40px;
+  background-image:url(../img/group.svg);
   background-size: cover;
 }
 .my-file-input{

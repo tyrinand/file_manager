@@ -176,4 +176,38 @@ class FolderController extends Controller
         $folder_title = "Результаты поиска";
         return view('home', compact('children_folder','folder_title','parent_folder','children_file','str_find')); 
     }
+    public function public_folder(folder $folder)
+    {   
+        /*$public_files = collect();
+        $public_folders = collect(); //  array_push($array, $x);
+
+        $public_folders->push($folder); //  корень
+        
+        $child_file = file::where('parent',$folder->id)->get(); // 1 уровень меньше
+        $children_folder = folder::where('parent', $folder->id)->get();
+
+        $public_files = $public_files->merge($child_file);
+        $public_folders = $public_folders->merge($children_folder);
+        
+        dd($public_files,$public_folders);
+        */
+        $public_files = collect();
+        $public_folders = collect();
+
+        $queue = collect();
+        $queue->push($folder); 
+        do {// цикл
+            $action_node = $queue->pop(); // извленечие последнего элемента
+
+            $public_folders->push($action_node); // текущий узел в результат добавление только тек узла к результату
+            $children_folder = folder::where('parent', $action_node->id)->get(); // поиск детей
+            $queue = $queue->merge($children_folder); // добавление в очередь на рассмотрение 
+
+            $child_file = file::where('parent',$action_node->id)->get(); // получение родительскх файлов
+            $public_files = $public_files->merge($child_file);
+        }
+            while (!$queue->isEmpty());
+
+        dd($public_folders,$public_files);
+    }
 }

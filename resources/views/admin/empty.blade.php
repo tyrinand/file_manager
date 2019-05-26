@@ -18,7 +18,7 @@
                 <div class="row justify-content-center">
                         <div class="col-8">
                             <br/>
-                            <p class="text-center">Поиск не дал резульата</p>
+                            <p class="text-center">Поиск не дал результата</p>
                             <div class="row justify-content-center">
                                 <a class="btn btn-info" href="{{ route('admin_panel') }}" >Назад</a>
                             </div>  
