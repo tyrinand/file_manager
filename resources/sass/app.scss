@@ -179,6 +179,13 @@
   background-image:url(../img/rename_folder.svg);
   background-size: cover;
 }
+.folder-share{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/share_folder.svg);
+  background-size: cover;
+}
 .share-group{
   display: inline-block;
   width: 20px;
@@ -229,6 +236,26 @@
   background-image:url(../img/folder_home_2.svg);
   background-size: cover;
 }
+.prerol{
+  display: inline-block;
+  width:  40px;
+  height: 40px;
+  background-image:url(../img/prerol.svg);
+  background-size: cover;
+  animation: move 2s infinite linear;
+}
+@keyframes move {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .menu-trash{
   display: inline-block;
   width:  40px;

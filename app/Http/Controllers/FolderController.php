@@ -10,6 +10,9 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Gate;
 use Illuminate\Support\Facades\DB;
+use App\sub_user;
+use App\public_folder;
+use App\group;
 
 
 class FolderController extends Controller
@@ -176,38 +179,99 @@ class FolderController extends Controller
         $folder_title = "Результаты поиска";
         return view('home', compact('children_folder','folder_title','parent_folder','children_file','str_find')); 
     }
-    public function public_folder(folder $folder)
-    {   
-        /*$public_files = collect();
-        $public_folders = collect(); //  array_push($array, $x);
-
-        $public_folders->push($folder); //  корень
-        
-        $child_file = file::where('parent',$folder->id)->get(); // 1 уровень меньше
-        $children_folder = folder::where('parent', $folder->id)->get();
-
-        $public_files = $public_files->merge($child_file);
-        $public_folders = $public_folders->merge($children_folder);
-        
-        dd($public_files,$public_folders);
-        */
-        $public_files = collect();
-        $public_folders = collect();
-
-        $queue = collect();
-        $queue->push($folder); 
-        do {// цикл
-            $action_node = $queue->pop(); // извленечие последнего элемента
-
-            $public_folders->push($action_node); // текущий узел в результат добавление только тек узла к результату
-            $children_folder = folder::where('parent', $action_node->id)->get(); // поиск детей
-            $queue = $queue->merge($children_folder); // добавление в очередь на рассмотрение 
-
-            $child_file = file::where('parent',$action_node->id)->get(); // получение родительскх файлов
-            $public_files = $public_files->merge($child_file);
+    //публикация папок
+    public function list_group(folder $folder)
+    {
+        if (Gate::denies('holder', $folder)) {
+            return redirect()->route('logout');
         }
-            while (!$queue->isEmpty());
+        $parent_folder = folder::find($folder->parent);
 
-        dd($public_folders,$public_files);
+        $list_group = sub_user::where('user_id', Auth::user()->id)->get();
+
+        return view('folder.group_list', compact('parent_folder','folder','list_group')); 
     }
+    public function sub_user_form(Request $request)
+    {
+        $fl_slug = $request['folder'];
+        $grop_id = $request['group'];
+        
+        $grop = group::where('id', $grop_id)->first();
+
+        $folder = folder::where('slug', $fl_slug)->first();
+
+        if (Gate::denies('holder', $folder)) {
+            return redirect()->route('logout');
+        }
+        $parent_folder = folder::find($folder->parent);
+        $list_group = sub_user::where('user_id', Auth::user()->id)->get();
+
+        $public_folder = public_folder::where('group_id', '=', $grop_id )->where('folder_id', $folder->id)->get();
+        
+        if($public_folder->isEmpty()) // была ли папка уже подписана на группу
+        {
+            return view('folder.sub_user_vd', compact('parent_folder','folder', 'grop'));
+        }
+        else
+        {
+            $request->session()->flash('status', 'Папка уже опубликована в этой группе');
+            return view('folder.group_list', compact('parent_folder','folder','list_group'));
+        }
+    }
+    public function vd_find_folder(Request $request)
+    {
+        $fl_slug = $request['folder'];
+        $folder = folder::where('slug', $fl_slug)->first();
+       // return response($folder, 200);
+       
+       $public_folders = collect();
+       $queue = collect();
+       $queue->push($folder); 
+       do {// цикл
+           $action_node = $queue->pop(); // извленечие последнего элемента
+           $public_folders->push($action_node); // текущий узел в результат добавление только тек узла к результату
+           $children_folder = folder::where('parent', $action_node->id)->get(); // поиск детей
+           $queue = $queue->merge($children_folder); // добавление в очередь на рассмотрение 
+       }
+        while (!$queue->isEmpty());
+
+         $slug_result = array();
+
+        foreach($public_folders as $pf)
+        {
+            array_push($slug_result, $pf->slug);
+        }
+        return response($slug_result, 200);
+    }
+    public function rootmount(folder $folder)
+    {
+        $folder->root_mount = true;
+        $folder->public_folder = true;
+        $folder->save();
+
+        return response()->json('Sucsess', 200);    
+    }
+    public function folders_sub(Request $request)
+    {
+        $fl_slug = $request['folder'];
+        $gr_slug = $request['group'];
+        $root_mount_slug = $request['root_mount'];
+
+        $folder = folder::where('slug', $fl_slug)->first();
+        $grop = group::where('slug', $gr_slug)->first();
+        $root_mount = folder::where('slug', $root_mount_slug)->first();
+
+        $folder->public_folder = true;
+        $folder->save(); // папка публичная
+
+        $new_public_folder = public_folder::create([
+            'holder_id'=> $grop->user_id, 
+            'group_id' => $grop->id,
+            'root_mount' => $root_mount->id,
+            'sub_user' => Auth::user()->id,
+            'folder_id' => $folder->id
+        ]);
+
+        return response()->json('Sucsess', 200);
+    }    
 }

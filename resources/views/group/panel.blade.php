@@ -73,7 +73,29 @@
                     У вас нет публичных папок
                 </div>
             @else
-
+              <br/>
+            <div class="row justify-content-center"><!-- таблица -->
+              <div class="col-md-8 col-12">
+                <table class="table table-bordered table-sm my-table table-condensed">
+                  <thead>
+                    <tr>
+                      <th>Название</th>
+                      <th>Владелец</th>
+                      <th>Путь монтирования</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  @foreach ($public_folder as $gr)
+                    <tr>
+                      <td>{{ $gr->group->title }}</td>
+                      <td>{{ $gr->group->user_login  }}</td>
+                      <td>{{ $gr->myfolder->title }}</td>
+                    </tr>
+                  @endforeach
+                  </tbody>    
+                  </table>
+              </div>
+            </div><!-- таблица -->  
             @endif
         </div>
   </div>

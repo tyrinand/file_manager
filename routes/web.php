@@ -72,8 +72,7 @@ Route::delete('/admin_panel/delete_user_folder/{folder}','AdminControl@admin_del
 //поиск
 Route::post('/serch','FolderController@serch_str')->name('serch_str');
 Route::post('admin_panel/serch_login','AdminControl@serch_login')->name('serch_login');
-//публичные папки
-Route::get('/folder_public_child/{folder}','FolderController@public_folder')->name('public_folder'); // реализация алгоритма поиска дочерних
+
 // работа с группами
 Route::get('/user_group', 'GroupController@index')->name('user_group'); // главное окно с 3 вкладками
 Route::get('/user_group/group_create','GroupController@create')->name('group_create');
@@ -82,3 +81,12 @@ Route::get('/user_group/group_share/{group}','GroupController@share')->name('gro
 //подписчика
 Route::get('/user_group/group_sub/{group}','Download@form_sub')->name('group_sub_form'); // 
 Route::post('/user_group/group_sub_form','Download@group_login_sub')->name('group_login_sub'); // маршрут для формы
+//публичные папки
+Route::get('/folder_list_group/{folder}','FolderController@list_group')->name('folder_list_group'); //вывод списка групп
+Route::post('/folder/sub_user_form','FolderController@sub_user_form')->name('folder_sub_user'); // маршрут открывающий виждет подписки
+// подписывание папки
+Route::post('/folder/vd_find_folder','FolderController@vd_find_folder')->name('vd_find_folder'); // ищет дочерние папки включая корень монтирования
+Route::delete('/folder/vd_find_folder/root/{folder}','FolderController@rootmount')->name('rootmount');// указывание корня монтирования
+Route::post('/folder/vd_sub_user/root','FolderController@folders_sub')->name('folders_sub');// подписывание папок
+
+

@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Gate;
 use App\sub_user;
+use App\public_folder;
+use App\folder;
 
 class GroupController extends Controller
 {
@@ -18,8 +20,18 @@ class GroupController extends Controller
     public function index()
     {
         $created_groups = group::where('user_id', Auth::user()->id)->get();
-        $public_folder = collect();
+       
         $inside_group = sub_user::where('user_id', Auth::user()->id)->get();//получить список групп
+        
+        $public_user_folder = folder::where('user_id', Auth::user()->id)->where('root_mount', 1)->get();
+
+        $public_folder = collect();
+
+        foreach($public_user_folder  as $pl)
+        {
+            $folders = public_folder::where('folder_id', $pl->id)->first();
+            $public_folder->push($folders);
+        }
         
         return view('group.panel', compact('created_groups','public_folder','inside_group')); 
     }

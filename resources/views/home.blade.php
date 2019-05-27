@@ -85,8 +85,8 @@
                                 <a href="{{ route('folder_edit',$fl->slug) }}">  
                                     <div class="folder-edit modile-icons" title="Переименовать папку"></div>  
                                 </a>
-                                <a href="{{ route('public_folder',$fl->slug) }}">  
-                                    поиск дочерних  
+                                <a href="{{ route('folder_list_group',$fl->slug) }}">  
+                                    <div class="folder-share modile-icons" title="Опубликовать папку"></div>  
                                 </a>
                               </form>
                             </td> 

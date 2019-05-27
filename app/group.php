@@ -19,4 +19,8 @@ class group extends Model
     {
         return $this->hasMany('App\sub_user','group_id', 'id');
     }
+    public function public_folder() // получение всех папок много публичных
+    {
+        return $this->hasMany('App\public_folder','group_id', 'id');
+    }
 }

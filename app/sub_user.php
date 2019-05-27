@@ -13,4 +13,5 @@ class sub_user extends Model
     {
         return $this->belongsTo('App\group','group_id', 'id');
     }
+    
 }

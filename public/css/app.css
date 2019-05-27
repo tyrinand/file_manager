@@ -10857,6 +10857,14 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.folder-share {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/share_folder.svg?ef77ad5de4b69781c57869932b061e80);
+  background-size: cover;
+}
+
 .share-group {
   display: inline-block;
   width: 20px;
@@ -10911,6 +10919,50 @@ a.text-dark:focus {
   height: 40px;
   background-image: url(/images/folder_home_2.svg?32dade639a7c064f130f58147ced9338);
   background-size: cover;
+}
+
+.prerol {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url(/images/prerol.svg?3d729c22f6ad22a3c01124c0ef526526);
+  background-size: cover;
+  -webkit-animation: move 2s infinite linear;
+          animation: move 2s infinite linear;
+}
+
+@-webkit-keyframes move {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes move {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
 }
 
 .menu-trash {
