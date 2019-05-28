@@ -1829,6 +1829,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "my-delete",
   data: function data() {
@@ -1839,27 +1842,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       countDelete: 0
     };
   },
-  props: ['folders', 'files', 'user', 'usize', 'count_folder', 'count_file'],
+  props: ['folders', 'files', 'user', 'usize', 'count_folder', 'count_file', 'groups', 'count_groups'],
   methods: {
     delete_obj: function () {
       var _delete_obj = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, item, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, _item;
+        var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, item, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, _item, _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, _item2;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.allObjts = this.count_folder + this.count_file;
+                this.allObjts = this.count_folder + this.count_file + this.count_groups;
 
                 if (!confirm("Удалить и заблокировать пользователя?")) {
-                  _context.next = 62;
+                  _context.next = 88;
                   break;
                 }
 
                 if (!(this.allObjts > 0)) {
-                  _context.next = 59;
+                  _context.next = 85;
                   break;
                 }
 
@@ -1871,7 +1874,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _didIteratorError = false;
                 _iteratorError = undefined;
                 _context.prev = 8;
-                _iterator = this.files[Symbol.iterator]();
+                _iterator = this.groups[Symbol.iterator]();
 
               case 10:
                 if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
@@ -1881,7 +1884,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 item = _step.value;
                 _context.next = 14;
-                return this.deletefile(item);
+                return this.deletegrop(item);
 
               case 14:
                 _iteratorNormalCompletion = true;
@@ -1923,12 +1926,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.finish(23);
 
               case 31:
-                // функция по удалению файлов
+                // функция по удалению групп
                 _iteratorNormalCompletion2 = true;
                 _didIteratorError2 = false;
                 _iteratorError2 = undefined;
                 _context.prev = 34;
-                _iterator2 = this.folders[Symbol.iterator]();
+                _iterator2 = this.files[Symbol.iterator]();
 
               case 36:
                 if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
@@ -1938,7 +1941,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _item = _step2.value;
                 _context.next = 40;
-                return this.deletefolder(_item);
+                return this.deletefile(_item);
 
               case 40:
                 _iteratorNormalCompletion2 = true;
@@ -1980,25 +1983,82 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.finish(49);
 
               case 57:
-                _context.next = 60;
-                break;
-
-              case 59:
-                alert('Нет объектов для удаления!!!');
-
-              case 60:
-                _context.next = 63;
-                break;
+                // функция по удалению файлов
+                _iteratorNormalCompletion3 = true;
+                _didIteratorError3 = false;
+                _iteratorError3 = undefined;
+                _context.prev = 60;
+                _iterator3 = this.folders[Symbol.iterator]();
 
               case 62:
+                if (_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done) {
+                  _context.next = 69;
+                  break;
+                }
+
+                _item2 = _step3.value;
+                _context.next = 66;
+                return this.deletefolder(_item2);
+
+              case 66:
+                _iteratorNormalCompletion3 = true;
+                _context.next = 62;
+                break;
+
+              case 69:
+                _context.next = 75;
+                break;
+
+              case 71:
+                _context.prev = 71;
+                _context.t2 = _context["catch"](60);
+                _didIteratorError3 = true;
+                _iteratorError3 = _context.t2;
+
+              case 75:
+                _context.prev = 75;
+                _context.prev = 76;
+
+                if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+                  _iterator3["return"]();
+                }
+
+              case 78:
+                _context.prev = 78;
+
+                if (!_didIteratorError3) {
+                  _context.next = 81;
+                  break;
+                }
+
+                throw _iteratorError3;
+
+              case 81:
+                return _context.finish(78);
+
+              case 82:
+                return _context.finish(75);
+
+              case 83:
+                _context.next = 86;
+                break;
+
+              case 85:
+                alert('Нет объектов для удаления!!!');
+
+              case 86:
+                _context.next = 89;
+                break;
+
+              case 88:
                 alert("Вы отменили удаление");
 
-              case 63:
+              case 89:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[8, 19, 23, 31], [24,, 26, 30], [34, 45, 49, 57], [50,, 52, 56]]);
+        }, _callee, this, [[8, 19, 23, 31], [24,, 26, 30], [34, 45, 49, 57], [50,, 52, 56], [60, 71, 75, 83], [76,, 78, 82]]);
       }));
 
       function delete_obj() {
@@ -2107,6 +2167,129 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return deletefolder;
+    }(),
+    deletegrop: function () {
+      var _deletegrop = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(item) {
+        var _this3 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return axios["delete"]('/user_group/group_drop/' + item.slug).then(function (response) {
+                  _this3.count_groups--;
+                  _this3.countDelete++;
+                  _this3.Progress = Math.round(_this3.countDelete / _this3.allObjts * 100);
+                  _this3.title = _this3.countDelete + "/" + _this3.allObjts;
+                })["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }));
+
+      function deletegrop(_x4) {
+        return _deletegrop.apply(this, arguments);
+      }
+
+      return deletegrop;
+    }()
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/del_group.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/del_group.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "my-del-gr",
+  data: function data() {
+    return {
+      find_btn: true,
+      finish_public: false
+    };
+  },
+  props: ['group'],
+  methods: {
+    select_obj: function () {
+      var _select_obj = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.find_btn = false;
+                _context.next = 3;
+                return axios["delete"]('/user_group/group_drop/' + this.group).then(function (response) {
+                  console.log(response);
+                  _this.find_btn = true;
+                  _this.finish_public = true;
+                })["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function select_obj() {
+        return _select_obj.apply(this, arguments);
+      }
+
+      return select_obj;
     }()
   }
 });
@@ -2562,7 +2745,290 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return this.root_mount(this.sub_foldes[0]);
 
               case 2:
-                // нулевой элемент корень для отображения
+                _context.next = 4;
+                return this.add_public(this.group);
+
+              case 4:
+                // папка подписана
+                _iteratorNormalCompletion = true;
+                _didIteratorError = false;
+                _iteratorError = undefined;
+                _context.prev = 7;
+                _iterator = this.sub_foldes[Symbol.iterator]();
+
+              case 9:
+                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                  _context.next = 16;
+                  break;
+                }
+
+                item = _step.value;
+                _context.next = 13;
+                return this.sub_user_folders(item);
+
+              case 13:
+                _iteratorNormalCompletion = true;
+                _context.next = 9;
+                break;
+
+              case 16:
+                _context.next = 22;
+                break;
+
+              case 18:
+                _context.prev = 18;
+                _context.t0 = _context["catch"](7);
+                _didIteratorError = true;
+                _iteratorError = _context.t0;
+
+              case 22:
+                _context.prev = 22;
+                _context.prev = 23;
+
+                if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+                  _iterator["return"]();
+                }
+
+              case 25:
+                _context.prev = 25;
+
+                if (!_didIteratorError) {
+                  _context.next = 28;
+                  break;
+                }
+
+                throw _iteratorError;
+
+              case 28:
+                return _context.finish(25);
+
+              case 29:
+                return _context.finish(22);
+
+              case 30:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[7, 18, 22, 30], [23,, 25, 29]]);
+      }));
+
+      function public_folders() {
+        return _public_folders.apply(this, arguments);
+      }
+
+      return public_folders;
+    }(),
+    root_mount: function () {
+      var _root_mount = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(root_slug) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios["delete"]('/folder/vd_find_folder/root/' + root_slug) // маршрут для корня монтирования
+                .then(function (response) {})["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function root_mount(_x) {
+        return _root_mount.apply(this, arguments);
+      }
+
+      return root_mount;
+    }(),
+    add_public: function () {
+      var _add_public = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(slug) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios["delete"]('/add_public/' + slug) // маршрут для корня монтирования
+                .then(function (response) {})["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      function add_public(_x2) {
+        return _add_public.apply(this, arguments);
+      }
+
+      return add_public;
+    }(),
+    sub_user_folders: function () {
+      var _sub_user_folders = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(item) {
+        var _this2 = this;
+
+        var form;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                this.find_result = false;
+                this.public_btn = true;
+                form = new FormData(); // создаем форму на js
+
+                form.append('folder', item);
+                form.append('group', this.group);
+                form.append('root_mount', this.sub_foldes[0]);
+                axios.post('/folder/vd_sub_user/root', form).then(function (response) {
+                  _this2.count_public++;
+                  _this2.progress = Math.round(_this2.count_public / _this2.sub_foldes.length * 100);
+                  _this2.title = _this2.count_public + "/" + _this2.sub_foldes.length;
+                  if (_this2.count_public === _this2.sub_foldes.length) _this2.finish_public = true;
+                })["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 7:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function sub_user_folders(_x3) {
+        return _sub_user_folders.apply(this, arguments);
+      }
+
+      return sub_user_folders;
+    }()
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/un_sub_user.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/un_sub_user.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "my-un-sub",
+  data: function data() {
+    return {
+      sub_foldes: [],
+      find_btn: true,
+      find_result: false,
+      progress: 0,
+      count_public: 0,
+      public_btn: false,
+      // отправлены на публикацию ничего не отображается кроме прогресс бара.
+      title: "",
+      finish_public: false
+    };
+  },
+  props: ['folder', 'group'],
+  methods: {
+    select_obj: function select_obj() {
+      var _this = this;
+
+      this.find_btn = false;
+      var form = new FormData(); // создаем форму на js
+
+      form.append('folder', this.folder); // поле с именем image
+
+      axios.post('/folder/un_vd_find_folder', form).then(function (response) {
+        //console.log(response);
+        _this.find_btn = true;
+        _this.sub_foldes = response.data;
+        _this.find_result = true;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    public_folders: function () {
+      var _public_folders = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, item;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.sub_public(this.group);
+
+              case 2:
+                // уменьшение
                 _iteratorNormalCompletion = true;
                 _didIteratorError = false;
                 _iteratorError = undefined;
@@ -2632,16 +3098,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return public_folders;
     }(),
-    root_mount: function () {
-      var _root_mount = _asyncToGenerator(
+    sub_public: function () {
+      var _sub_public = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(root_slug) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(slug) {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios["delete"]('/folder/vd_find_folder/root/' + root_slug) // маршрут для корня монтирования
+                return axios["delete"]('/sub_public/' + slug) // маршрут для корня монтирования
                 .then(function (response) {})["catch"](function (error) {
                   console.log(error);
                 });
@@ -2654,11 +3120,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }));
 
-      function root_mount(_x) {
-        return _root_mount.apply(this, arguments);
+      function sub_public(_x) {
+        return _sub_public.apply(this, arguments);
       }
 
-      return root_mount;
+      return sub_public;
     }(),
     sub_user_folders: function () {
       var _sub_user_folders = _asyncToGenerator(
@@ -2677,8 +3143,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 form.append('folder', item);
                 form.append('group', this.group);
-                form.append('root_mount', this.sub_foldes[0]);
-                axios.post('/folder/vd_sub_user/root', form).then(function (response) {
+                axios.post('/folder/un_vd_sub_user', form).then(function (response) {
                   _this2.count_public++;
                   _this2.progress = Math.round(_this2.count_public / _this2.sub_foldes.length * 100);
                   _this2.title = _this2.count_public + "/" + _this2.sub_foldes.length;
@@ -2687,7 +3152,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.log(error);
                 });
 
-              case 7:
+              case 6:
               case "end":
                 return _context3.stop();
             }
@@ -38591,6 +39056,12 @@ var render = function() {
               _vm._v(" "),
               _c("tbody", [
                 _c("tr", [
+                  _c("td", [_vm._v("Кол-во групп")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.count_groups))])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
                   _c("td", [_vm._v("Кол-во папок")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.count_folder))])
@@ -38624,6 +39095,71 @@ var render = function() {
   )
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/del_group.vue?vue&type=template&id=51b84610&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/del_group.vue?vue&type=template&id=51b84610& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.find_btn
+        ? _c("div", [
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _c("div", { staticClass: "col-12 col-md-4" }, [
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger btn-block",
+                    attrs: { disabled: _vm.finish_public },
+                    on: { click: _vm.select_obj }
+                  },
+                  [_vm._v("Удалить группу")]
+                )
+              ])
+            ])
+          ])
+        : _c("div", [_vm._m(0)]),
+      _vm._v(" "),
+      _vm.finish_public
+        ? [
+            _c("br"),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-center" }, [_vm._v("Группа удалена")])
+          ]
+        : _vm._e()
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "prerol" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -39010,7 +39546,7 @@ var render = function() {
       _vm.find_btn
         ? _c("div", [
             _c("div", { staticClass: "row justify-content-center" }, [
-              _c("div", { staticClass: "col-4" }, [
+              _c("div", { staticClass: "col-12 col-md-4" }, [
                 _c("br"),
                 _vm._v(" "),
                 _c(
@@ -39030,7 +39566,7 @@ var render = function() {
       _vm.find_result
         ? _c("div", [
             _c("div", { staticClass: "row justify-content-center" }, [
-              _c("div", { staticClass: "col-4" }, [
+              _c("div", { staticClass: "col-12 col-md-4" }, [
                 _c("br"),
                 _vm._v(" "),
                 _c("p", { staticClass: "text-center" }, [
@@ -39093,6 +39629,133 @@ var render = function() {
         ? [
             _c("p", { staticClass: "text-center" }, [
               _vm._v("Все папки опубликованы")
+            ])
+          ]
+        : _vm._e()
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "prerol" })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/un_sub_user.vue?vue&type=template&id=7ba12f56&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/un_sub_user.vue?vue&type=template&id=7ba12f56& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.find_btn
+        ? _c("div", [
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _c("div", { staticClass: "col-12 col-md-4" }, [
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-block",
+                    attrs: { disabled: _vm.public_btn },
+                    on: { click: _vm.select_obj }
+                  },
+                  [_vm._v("Поиск объектов")]
+                )
+              ])
+            ])
+          ])
+        : _c("div", [_vm._m(0)]),
+      _vm._v(" "),
+      _vm.find_result
+        ? _c("div", [
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _c("div", { staticClass: "col-12 col-md-4" }, [
+                _c("br"),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-center" }, [
+                  _vm._v(
+                    "Дочерние папки: (" + _vm._s(_vm.sub_foldes.length) + ")"
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-block",
+                    on: { click: _vm.public_folders }
+                  },
+                  [_vm._v("Отписать папку и вложенные объекты")]
+                )
+              ])
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.public_btn
+        ? [
+            _c("div", { staticClass: "row justify-content-center" }, [
+              _c("div", { staticClass: "col-10" }, [
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "progress", staticStyle: { height: "40px" } },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "progress-bar",
+                        style: { width: _vm.progress + "%" },
+                        attrs: {
+                          role: "progressbar",
+                          "aria-valuenow": "25",
+                          "aria-valuemin": "0",
+                          "aria-valuemax": "100"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                   " +
+                            _vm._s(_vm.title) +
+                            "\r\n                "
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ])
+            ])
+          ]
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.finish_public
+        ? [
+            _c("p", { staticClass: "text-center" }, [
+              _vm._v("Все папки отписаны")
             ])
           ]
         : _vm._e()
@@ -51280,6 +51943,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.component('my-upload', __webpack_require__(/*! ./components/my.vue */ "./resources/js/components/my.vue")["default"]);
 Vue.component('my-delete', __webpack_require__(/*! ./components/all_delete.vue */ "./resources/js/components/all_delete.vue")["default"]);
 Vue.component('my-sub', __webpack_require__(/*! ./components/sub_user.vue */ "./resources/js/components/sub_user.vue")["default"]);
+Vue.component('my-un-sub', __webpack_require__(/*! ./components/un_sub_user.vue */ "./resources/js/components/un_sub_user.vue")["default"]);
+Vue.component('my-del-gr', __webpack_require__(/*! ./components/del_group.vue */ "./resources/js/components/del_group.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -51419,6 +52084,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/del_group.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/del_group.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _del_group_vue_vue_type_template_id_51b84610___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./del_group.vue?vue&type=template&id=51b84610& */ "./resources/js/components/del_group.vue?vue&type=template&id=51b84610&");
+/* harmony import */ var _del_group_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./del_group.vue?vue&type=script&lang=js& */ "./resources/js/components/del_group.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _del_group_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _del_group_vue_vue_type_template_id_51b84610___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _del_group_vue_vue_type_template_id_51b84610___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/del_group.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/del_group.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/del_group.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_del_group_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./del_group.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/del_group.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_del_group_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/del_group.vue?vue&type=template&id=51b84610&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/del_group.vue?vue&type=template&id=51b84610& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_del_group_vue_vue_type_template_id_51b84610___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./del_group.vue?vue&type=template&id=51b84610& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/del_group.vue?vue&type=template&id=51b84610&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_del_group_vue_vue_type_template_id_51b84610___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_del_group_vue_vue_type_template_id_51b84610___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/my.vue":
 /*!****************************************!*\
   !*** ./resources/js/components/my.vue ***!
@@ -51552,6 +52286,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_sub_user_vue_vue_type_template_id_0b574ab5___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_sub_user_vue_vue_type_template_id_0b574ab5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/un_sub_user.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/un_sub_user.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _un_sub_user_vue_vue_type_template_id_7ba12f56___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./un_sub_user.vue?vue&type=template&id=7ba12f56& */ "./resources/js/components/un_sub_user.vue?vue&type=template&id=7ba12f56&");
+/* harmony import */ var _un_sub_user_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./un_sub_user.vue?vue&type=script&lang=js& */ "./resources/js/components/un_sub_user.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _un_sub_user_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _un_sub_user_vue_vue_type_template_id_7ba12f56___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _un_sub_user_vue_vue_type_template_id_7ba12f56___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/un_sub_user.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/un_sub_user.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/un_sub_user.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_un_sub_user_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./un_sub_user.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/un_sub_user.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_un_sub_user_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/un_sub_user.vue?vue&type=template&id=7ba12f56&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/un_sub_user.vue?vue&type=template&id=7ba12f56& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_un_sub_user_vue_vue_type_template_id_7ba12f56___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./un_sub_user.vue?vue&type=template&id=7ba12f56& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/un_sub_user.vue?vue&type=template&id=7ba12f56&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_un_sub_user_vue_vue_type_template_id_7ba12f56___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_un_sub_user_vue_vue_type_template_id_7ba12f56___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

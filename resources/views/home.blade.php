@@ -55,7 +55,13 @@
                             <td >
                               <a href="{{ route('folder_child',$fl->slug) }}" class="folder-link">  
                                 <div class="folder-container" >
-                                    <div class="folder modile-icons" ></div>
+                                  @if( ($fl->root_mount === 0) && ( $fl->public_folder === 0 ) )
+                                    <div class="folder modile-icons" title="Локальная папка"></div>
+                                  @elseif(($fl->root_mount === 0) && ( $fl->public_folder === 1 ))
+                                    <div class="folder-public modile-icons" title="Публичная папка"></div>
+                                  @else
+                                    <div class="folder-public-root modile-icons" title="Корень монитирования"></div>
+                                  @endif
                                     <span class="my-min-space"></span>
                                     <?php 
                                           if(strlen($fl->user_name) > 45)
@@ -88,6 +94,11 @@
                                 <a href="{{ route('folder_list_group',$fl->slug) }}">  
                                     <div class="folder-share modile-icons" title="Опубликовать папку"></div>  
                                 </a>
+                                @if( ($fl->root_mount === 1) && ( $fl->public_folder === 1 ) )
+                                  <a href="{{ route('folder_un_list_group',$fl->slug) }}">  
+                                      <div class="folder-close modile-icons" title="Отписать папку"></div>  
+                                  </a>
+                                @endif
                               </form>
                             </td> 
                           </tr>

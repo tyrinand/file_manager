@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <span class="my-table">Пользователь: {{ user }}</span>
         <span class="file-title-upload" v-if="(usize/1024) < 1024" > Использовано: {{  (usize/1024).toFixed(2) }}Kb</span>
-        <span class="file-title-upload" v-else="(usize/1048576)" > Использовано: {{  (usize/1048576).toFixed(2) }}Mb</span>
+        <span class="file-title-upload" v-else > Использовано: {{  (usize/1048576).toFixed(2) }}Mb</span>
       </div>
     </div>
     <template v-if="Progress > 0" > <!-- v-if="Progress > 0" -->
@@ -26,6 +26,9 @@
         <thead>
         </thead>
         <tbody>
+          <tr>
+            <td>Кол-во групп</td> <td>{{ count_groups }}</td>
+          </tr>
           <tr>
             <td>Кол-во папок</td> <td>{{ count_folder }}</td>
           </tr>
@@ -55,10 +58,10 @@
               countDelete: 0
            }
        },
-       props:['folders', 'files', 'user','usize','count_folder','count_file'],
+       props:['folders', 'files', 'user','usize','count_folder','count_file','groups','count_groups'],
         methods: {
         async  delete_obj(){
-                  this.allObjts = this.count_folder + this.count_file;
+                  this.allObjts = this.count_folder + this.count_file + this.count_groups;
 
                 if (confirm("Удалить и заблокировать пользователя?"))
                   {
@@ -66,8 +69,12 @@
                     {
                       await this.blockUser(this.user);
 
+                    for(let item of this.groups)
+                      await this.deletegrop(item); // функция по удалению групп
+
                       for(let item of this.files)
                           await this.deletefile(item); // функция по удалению файлов
+
                      for(let item of this.folders)
                         await this.deletefolder(item);// функция по удаленю папок
                     }
@@ -113,6 +120,19 @@
               await axios.delete('/admin_panel/delete_user_folder/' + item.slug)
                 .then(response =>{
                       this.count_folder--;
+                      this.countDelete++; 
+                      this.Progress =  Math.round((this.countDelete / this.allObjts) * 100);
+                      this.title = this.countDelete + "/" + this.allObjts;
+                })
+                .catch(error =>{
+                    console.log(error);
+                })
+            },
+            async deletegrop(item)
+            {
+              await axios.delete('/user_group/group_drop/' + item.slug)
+                .then(response =>{
+                      this.count_groups--;
                       this.countDelete++; 
                       this.Progress =  Math.round((this.countDelete / this.allObjts) * 100);
                       this.title = this.countDelete + "/" + this.allObjts;

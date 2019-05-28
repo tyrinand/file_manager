@@ -10,6 +10,8 @@ use App\file;
 use Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\group;
+use App\public_folder;
 
 class AdminControl extends Controller
 {
@@ -118,7 +120,10 @@ class AdminControl extends Controller
         $folders = folder::where('user_id', $User->id )->where('root', '0')->get(['slug']);
         $count_folder = $folders->count();
         
-        return view('admin.delete_all', compact('files','folders','count_folder','count_file','user_login','user_size')); 
+        $groups = group::where('user_id', $User->id )->get(['slug']);
+        $count_groups = $groups->count();
+
+        return view('admin.delete_all', compact('files','folders','count_folder','count_file','user_login','user_size','groups','count_groups')); 
     }
     public function admin_delete_file($slug) 
     {
@@ -153,6 +158,11 @@ class AdminControl extends Controller
     {
         if (Gate::denies('admin')) { 
             return response(401); // аякс запрос редирект не возможен
+        }
+        if($folder->public_folder === 1)
+        {
+           $pf = public_folder::where('folder_id', $folder->id)->first();
+           $pf->delete();
         }
 
         Storage::deleteDirectory($folder->server_name);

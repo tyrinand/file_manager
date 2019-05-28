@@ -98,6 +98,10 @@ class FolderController extends Controller
                         ->where('user_id', Auth::user()->id)
                         ->first();
 
+            if($folder->public_folder === 1)
+            {
+                return redirect()->route('folder_child',$parent_folder)->with('status', 'Для удаления отпишите папку от группы'); // отображение родительской папки пока что home
+            }            
             if( ($folders > 0) || ($files > 0))
                 {  
                     return redirect()->route('folder_child',$parent_folder)->with('status', 'Для удаления папки удалите дочерние элементы'); // отображение родительской папки пока что home
@@ -243,6 +247,31 @@ class FolderController extends Controller
         }
         return response($slug_result, 200);
     }
+    public function vd_find_folder_un(Request $request) // контроллер ищет опубликованные папки нужен для отписки, если добавили новую папку
+    {
+        $fl_slug = $request['folder'];
+        $folder = folder::where('slug', $fl_slug)->first();
+       // return response($folder, 200);
+       
+       $public_folders = collect();
+       $queue = collect();
+       $queue->push($folder); 
+       do {// цикл
+           $action_node = $queue->pop(); // извленечие последнего элемента
+           $public_folders->push($action_node); // текущий узел в результат добавление только тек узла к результату
+           $children_folder = folder::where('parent', $action_node->id)->where('public_folder', 1)->get(); // поиск детей
+           $queue = $queue->merge($children_folder); // добавление в очередь на рассмотрение 
+       }
+        while (!$queue->isEmpty());
+
+         $slug_result = array();
+
+        foreach($public_folders as $pf)
+        {
+            array_push($slug_result, $pf->slug);
+        }
+        return response($slug_result, 200);
+    }
     public function rootmount(folder $folder)
     {
         $folder->root_mount = true;
@@ -273,5 +302,59 @@ class FolderController extends Controller
         ]);
 
         return response()->json('Sucsess', 200);
-    }    
-}
+    }
+    // отписка
+    public function un_list_group(folder $folder)
+    {
+        if (Gate::denies('holder', $folder)) {
+            return redirect()->route('logout');
+        }
+        $parent_folder = folder::find($folder->parent);
+
+        $list_public_folder = public_folder::where('root_mount', $folder->id)->where('folder_id',$folder->id)->get();
+
+        $list_group = collect();
+
+        foreach($list_public_folder as $ls)
+        {
+            $gr = group::where('id', $ls->group_id)->first();
+            $list_group->push($gr);
+        }
+        return view('folder.group_un_list', compact('parent_folder','folder','list_group')); 
+    }
+    public function un_sub_user_form(Request $request)
+    {
+        $fl_slug = $request['folder'];
+        $grop_id = $request['group'];
+        
+        $grop = group::where('slug', $grop_id)->first();
+
+        $folder = folder::where('slug', $fl_slug)->first();
+
+        if (Gate::denies('holder', $folder)) {
+            return redirect()->route('logout');
+        }
+        $parent_folder = folder::find($folder->parent);
+        
+
+        return view('folder.un_sub_user_vd', compact('parent_folder','folder', 'grop'));
+    }
+    public function folders_un_sub(Request $request)
+    {
+        
+        $fl_slug = $request['folder'];
+        $gr_slug = $request['group'];
+
+        $folder = folder::where('slug', $fl_slug)->first();
+        $grop = group::where('slug', $gr_slug)->first();
+
+        $folder->public_folder = false;
+        $folder->root_mount = false;
+        $folder->save(); // папка  не публичная
+
+        $pub_fl = public_folder::where('group_id', $grop->id)->where('folder_id', $folder->id)->first();
+        $pub_fl->delete();
+
+        return response()->json('Sucsess', 200);
+    }
+}             

@@ -63,4 +63,50 @@ class GroupController extends Controller
 
         return view('group.share',compact('group')); 
     }
+    public function delete(group $group) // форма для удаления группы
+    {   
+        if (Gate::denies('holder', $group)) { 
+            return redirect()->route('logout');
+        }
+
+        return view('group.vd_delete',compact('group')); 
+    }
+    public function group_drop(group $group) // форма для удаления группы
+    {
+        $pb_fl = public_folder::where('group_id', $group->id)->get();
+
+        if($pb_fl->isNotEmpty())
+            {
+                foreach($pb_fl as $fl)
+                {
+                    $remp_fl = folder::where('id', $fl->folder_id)->first();
+                    $remp_fl->public_folder = false;
+                    $remp_fl->root_mount = false;
+                    $remp_fl->save();
+
+                    $fl->delete(); //удаление всех публичных папок
+                }
+            }
+        $sub_users = sub_user::where('group_id',$group->id)->get();
+        if($sub_users->isNotEmpty())
+            {
+                foreach($sub_users as $su)
+                {
+                    $su->delete(); //удаление всех подписчиков
+                }
+            }
+            $group->delete();
+
+        return response()->json('Sucsess', 200);
+    }
+    public function add_public(group $group) // увеличение числа публичных папок
+    {
+        $group->public_folder_count++;
+        $group->save();
+    }
+    public function sub_public(group $group) // уменьшение числа публичных папок
+    {
+        $group->public_folder_count--;
+        $group->save();
+    }
 }

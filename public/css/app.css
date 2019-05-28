@@ -10753,6 +10753,22 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.folder-public {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/folder_public.svg?79eefbcfd7821c99a734f62f3aca6363);
+  background-size: cover;
+}
+
+.folder-public-root {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/folder_root_public.svg?83a8bcdb480e9b25343c0f24d89971d6);
+  background-size: cover;
+}
+
 .file {
   display: inline-block;
   width: 30px;
@@ -10862,6 +10878,14 @@ a.text-dark:focus {
   width: 30px;
   height: 30px;
   background-image: url(/images/share_folder.svg?ef77ad5de4b69781c57869932b061e80);
+  background-size: cover;
+}
+
+.folder-close {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/close_folder.svg?21b55a7a0a8b085c271e302ecbb321c2);
   background-size: cover;
 }
 

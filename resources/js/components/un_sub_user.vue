@@ -18,7 +18,7 @@
     <div class="col-12 col-md-4">
       <br/>
       <p class="text-center">Дочерние папки: ({{sub_foldes.length }})</p>
-      <button class="btn btn-primary btn-block" @click="public_folders">Произвести публикацию</button>
+      <button class="btn btn-primary btn-block" @click="public_folders">Отписать папку и вложенные объекты</button>
     </div>  
     </div> 
   </div>
@@ -35,14 +35,14 @@
         </div>
       </template>
         <template v-if="(finish_public)" > 
-            <p class="text-center">Все папки опубликованы</p>
+            <p class="text-center">Все папки отписаны</p>
         </template>
 
 </div>    
 </template>
 <script>
     export default {
-        name: "my-sub",
+        name: "my-un-sub",
          data() {
            return{
                sub_foldes: [],
@@ -60,9 +60,9 @@
           select_obj()
           {
             this.find_btn = false;
-           let form = new FormData(); // создаем форму на js
+            let form = new FormData(); // создаем форму на js
                 form.append('folder',this.folder); // поле с именем image
-                 axios.post('/folder/vd_find_folder',form)
+                 axios.post('/folder/un_vd_find_folder',form)
                 .then(response =>{
                    //console.log(response);
                    this.find_btn = true;
@@ -75,25 +75,14 @@
           },
         async  public_folders()
               {
-                  await this.root_mount(this.sub_foldes[0]); // нулевой элемент корень для отображения
-
-                  await this.add_public(this.group); // папка подписана
+                await this.sub_public(this.group); // уменьшение
 
                   for(let item of this.sub_foldes)
                           await this.sub_user_folders(item); // функция по удалению файлов        
               },
-        async root_mount(root_slug)
+            async sub_public(slug)
             {
-            await axios.delete('/folder/vd_find_folder/root/' +  root_slug) // маршрут для корня монтирования
-                  .then(response =>{
-                  })
-                  .catch(error =>{
-                    console.log(error);
-                  })
-            },
-            async add_public(slug)
-            {
-            await axios.delete('/add_public/' + slug) // маршрут для корня монтирования
+            await axios.delete('/sub_public/' + slug) // маршрут для корня монтирования
                   .then(response =>{
                   })
                   .catch(error =>{
@@ -107,9 +96,8 @@
             let form = new FormData(); // создаем форму на js
                 form.append('folder',item);
                 form.append('group',this.group);
-                form.append('root_mount',this.sub_foldes[0]);
 
-                 axios.post('/folder/vd_sub_user/root',form)
+                 axios.post('/folder/un_vd_sub_user',form)
                 .then(response =>{
                       this.count_public++;
                       this.progress =  Math.round((this.count_public / this.sub_foldes.length) * 100);

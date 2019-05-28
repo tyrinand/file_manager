@@ -92,6 +92,20 @@
   background-image:url(../img/folder.svg);
   background-size: cover;
 }
+.folder-public{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/folder_public.svg);
+  background-size: cover;
+}
+.folder-public-root{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/folder_root_public.svg);
+  background-size: cover;
+}
 .file{
   display: inline-block;
   width: 30px;
@@ -184,6 +198,13 @@
   width: 30px;
   height: 30px;
   background-image:url(../img/share_folder.svg);
+  background-size: cover;
+}
+.folder-close{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/close_folder.svg);
   background-size: cover;
 }
 .share-group{

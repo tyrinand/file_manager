@@ -26,6 +26,8 @@ window.Vue = require('vue');
 Vue.component('my-upload', require('./components/my.vue').default);
 Vue.component('my-delete', require('./components/all_delete.vue').default);
 Vue.component('my-sub', require('./components/sub_user.vue').default);
+Vue.component('my-un-sub', require('./components/un_sub_user.vue').default);
+Vue.component('my-del-gr', require('./components/del_group.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

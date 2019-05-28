@@ -11,7 +11,7 @@
                 </div>
               @endif
                 <div id="app">
-                  <my-delete user="{{ $user_login }}" :folders="{{ $folders }}" :files="{{ $files }}"  :usize="{{ $user_size }}" :count_folder="{{ $count_folder }}" :count_file="{{ $count_file }}" ><my-delete>
+                  <my-delete user="{{ $user_login }}" :groups="{{ $groups }}" :folders="{{ $folders }}" :files="{{ $files }}"  :usize="{{ $user_size }}" :count_folder="{{ $count_folder }}" :count_file="{{ $count_file }}" :count_groups="{{ $count_groups }}"><my-delete>
                 </div>    <!-- конец блока -->
                 </div>
             <!-- продалжение карточки -->

@@ -88,5 +88,15 @@ Route::post('/folder/sub_user_form','FolderController@sub_user_form')->name('fol
 Route::post('/folder/vd_find_folder','FolderController@vd_find_folder')->name('vd_find_folder'); // ищет дочерние папки включая корень монтирования
 Route::delete('/folder/vd_find_folder/root/{folder}','FolderController@rootmount')->name('rootmount');// указывание корня монтирования
 Route::post('/folder/vd_sub_user/root','FolderController@folders_sub')->name('folders_sub');// подписывание папок
-
-
+//отписка
+Route::get('/folder_un_list_group/{folder}','FolderController@un_list_group')->name('folder_un_list_group'); //вывод списка групп
+Route::post('/folder/un_sub_user_form','FolderController@un_sub_user_form')->name('un_sub_user_form'); // маршрут открывающий виждет отподписки
+Route::post('/folder/un_vd_sub_user','FolderController@folders_un_sub')->name('folders_un_sub');// отписывание папок
+// рекурсивное удаление группы
+Route::get('/user_group/group_delete/{group}','GroupController@delete')->name('group_destroy'); // удаление виждет
+Route::delete('/user_group/group_drop/{group}','GroupController@group_drop')->name('group_drop');// запрос виджета
+//увеличение и меньшение
+Route::delete('/add_public/{group}','GroupController@add_public')->name('add_public');// запрос увеличения подписок
+Route::delete('/sub_public/{group}','GroupController@sub_public')->name('sub_public');// запрос уменьшения подписок
+// отписка опубликованных папок
+Route::post('/folder/un_vd_find_folder','FolderController@vd_find_folder_un')->name('vd_find_folder_un'); 

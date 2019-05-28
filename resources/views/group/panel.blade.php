@@ -50,7 +50,7 @@
                           <a href="{{ route('group_share',$gr->slug) }}">  
                             <div class="share-group modile-icons" title="Отправить ссылку на вступление"></div>  
                           </a>
-                          <a href="">  
+                          <a href="{{ route('group_destroy',$gr->slug) }}">  
                             <div class="delete-group modile-icons" title="Удалить группу"></div>  
                           </a>
                       </td>
