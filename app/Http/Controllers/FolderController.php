@@ -155,7 +155,10 @@ class FolderController extends Controller
         // foldername for title
         $folder_title = $root_users->title; // заголовок
         $parent_folder = $root_users; // родительский каталог
-        return view('home', compact('children_folder','folder_title','parent_folder','children_file')); 
+
+        $public_groups = group::where('user_id', $current_user->id)->where('public_folder_count', '>', 0)->get();
+
+        return view('home', compact('children_folder','folder_title','parent_folder','children_file','public_groups'));
     }
     public function serch_str(Request $request)
     {

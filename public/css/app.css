@@ -10753,6 +10753,14 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.group-public {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url(/images/group_public.svg?d2fb98417d5334aeac82b2ed403f0ba9);
+  background-size: cover;
+}
+
 .folder-public {
   display: inline-block;
   width: 30px;
@@ -10934,6 +10942,14 @@ a.text-dark:focus {
   width: 40px;
   height: 40px;
   background-image: url(/images/folder_up.svg?a0f3bffb6eacc3873ee5d19eb0ef7081);
+  background-size: cover;
+}
+
+.menu-group-home {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url(/images/folder_root_public.svg?83a8bcdb480e9b25343c0f24d89971d6);
   background-size: cover;
 }
 

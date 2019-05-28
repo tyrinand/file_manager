@@ -10,6 +10,7 @@ use Gate;
 use App\sub_user;
 use App\public_folder;
 use App\folder;
+use App\file;
 
 class GroupController extends Controller
 {
@@ -109,4 +110,69 @@ class GroupController extends Controller
         $group->public_folder_count--;
         $group->save();
     }
+    //проводник по папкам
+    public function open(group $group) // открытие группы
+    {
+        if (Gate::denies('holder', $group)) { // группа принадлежит
+            return redirect()->route('logout');
+        }
+
+        $public_folder = public_folder::where('group_id', $group->id)->get();
+
+        $public_folders_rez = collect(); // корни монтирования для текущей группы
+
+        foreach($public_folder as $pl_f)
+        {
+            if($pl_f->folder_id == $pl_f->root_mount)
+            {
+                $my_folder = folder::where('id', $pl_f->root_mount)->first();
+                $public_folders_rez->push($my_folder);
+            }
+        }
+        return view('group.folders_in_gr',compact('public_folders_rez','group'));
+    }
+    public function child(folder $folder,group $group)
+    {
+        // проверка на принадлежность
+       $pf = public_folder::where('group_id', $group->id)->where('folder_id',$folder->id)->first();// публичная папка
+       
+       if($pf->holder_id != Auth::user()->id){
+            return redirect()->route('logout');
+       }
+       // проверка на принадлежность
+
+                $parent_folder = $folder; // родительская папка
+
+                $children_folder = folder::where('parent', $parent_folder->id)->where('public_folder',1)->get();                    
+
+                $folder_title =  "@$group->title@"."\\".$parent_folder->title;
+                // необходимо соответствие имен
+                $children_file = file::where('parent',$parent_folder->id)->get();
+
+                return view('group.gr_home', compact('children_folder','folder_title','parent_folder','children_file','group')); 
+    }
+    public function parent(folder $folder,group $group)
+    {
+        $pf = public_folder::where('group_id', $group->id)->where('folder_id',$folder->id)->first();// публичная папка
+       
+       if($pf->holder_id != Auth::user()->id){
+            return redirect()->route('logout');
+       }
+        $child = $folder;
+        $parent_folder = folder::where('id', $child->parent)->first(); // взятие родителя
+
+        return redirect()->route('child',['folder' => $parent_folder->slug, 'group' => $group->slug]);
+    }   
+    public function gr_master_download(file $file,group $group)  //маршрут загрузки для владельца
+    {   
+        $parent_folder = folder::where('id', $file->parent)->first();
+
+        $pf = public_folder::where('group_id', $group->id)->where('folder_id',$parent_folder->id)->first();// публичная папка
+       
+       if($pf->holder_id != Auth::user()->id){
+            return redirect()->route('logout');
+       }
+
+        return response()->download(storage_path('app/' . $file->server_path)); //внутренняя загрузка
+    } 
 }

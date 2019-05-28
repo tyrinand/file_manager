@@ -92,6 +92,13 @@
   background-image:url(../img/folder.svg);
   background-size: cover;
 }
+.group-public{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image:url(../img/group_public.svg);
+  background-size: cover;
+}
 .folder-public{
   display: inline-block;
   width: 30px;
@@ -248,6 +255,13 @@
   width:40px;
   height: 40px;
   background-image:url(../img/folder_up.svg);
+  background-size: cover;
+}
+.menu-group-home{
+  display: inline-block;
+  width:40px;
+  height: 40px;
+  background-image:url(../img/folder_root_public.svg);
   background-size: cover;
 }
 .menu-folder-home{

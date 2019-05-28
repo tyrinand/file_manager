@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\folder;
 use App\file;
 use Illuminate\Support\Str;
+use App\group;
 
 class HomeController extends Controller
 {
@@ -44,6 +45,9 @@ class HomeController extends Controller
         $children_file = file::where('parent', $root_users->id)
                                 ->where('user_id', $current_user->id) // дочерние файлы принадлежащие пользователю
                                 ->get();
-        return view('home', compact('children_folder','folder_title','parent_folder','children_file'));    
+
+        $public_groups = group::where('user_id', $current_user->id)->where('public_folder_count', '>', 0)->get();
+                                
+        return view('home', compact('children_folder','folder_title','parent_folder','children_file','public_groups'));    
     }
 }

@@ -100,3 +100,12 @@ Route::delete('/add_public/{group}','GroupController@add_public')->name('add_pub
 Route::delete('/sub_public/{group}','GroupController@sub_public')->name('sub_public');// запрос уменьшения подписок
 // отписка опубликованных папок
 Route::post('/folder/un_vd_find_folder','FolderController@vd_find_folder_un')->name('vd_find_folder_un'); 
+//проводник по группам
+Route::get('/group/open/{group}','GroupController@open')->name('group_open'); // открытие содержимого группы
+Route::get('/group/open/folder_child/folder/{folder}/group/{group}','GroupController@child')->name('child'); //дочерние элементы
+Route::get('/group/open/folder_parent/folder/{folder}/group/{group}','GroupController@parent')->name('group_parent'); // переход вверх
+//загрузка
+Route::get('/group/file_download/file/{file}/group/{group} /','GroupController@gr_master_download')->name('gr_master_download');
+
+
+

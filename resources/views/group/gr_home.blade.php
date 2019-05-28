@@ -3,25 +3,6 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
-        @if( isset($public_groups) && ( $public_groups->isNotEmpty() ) )
-          <div class="card">
-            <div class="card-header"><!-- заголовок -->
-              <span>Группы</span>
-            </div>
-            <div class="card-body"><!-- тело карты -->
-              @foreach ($public_groups as $pg)
-              <a href="{{ route('group_open',$pg->slug) }}" class="folder-link">
-                <div class="folder-container" >
-                  <div class="group-public modile-icons" title="Группа"></div>
-                  <span class="my-min-space"></span>
-                  <span class="my-file-name">{{ $pg->title }}</span>
-                </div>
-              </a>    
-              @endforeach
-            </div>
-          </div><!-- конец карточки -->
-          <br/>
-        @endif
             <div class="card">
             @if (session('status'))
               <!-- флеш сообщение -->
@@ -31,17 +12,7 @@
             @endif
                 <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
-                  {{ $folder_title }}
-                  @if (($children_file->isNotEmpty()) )
-                    <form class="" action="{{ route('all_input') }}" method="post" onsubmit="if(confirm('Удалить файлы из текущего каталога ?')){return true}else{return false}">
-                      <input type="hidden" name="_method" value="DELETE">
-                      <input type="hidden" name="slug" value="{{ $parent_folder->slug }}">
-                        {{ csrf_field() }}
-                        <button type="submit" class="my-submit-btn">
-                          <div class="all-input-backet modile-icons" title="Удаление файлов из текущего каталога"></div>
-                        </button>
-                      </form>   
-                    @endif
+                    {{ $folder_title }}
                 </div>
                 </div>
                 @if ( ($children_folder->isNotEmpty()) || ($children_file->isNotEmpty()) )
@@ -49,19 +20,9 @@
                       <thead>
                         <tr>
                           <th>
-                            <div class="my-wrap-find-string"> <!-- поиск по файлам и папкам -->
-                                <form class="search" action="{{ route('serch_str') }}" method="POST"> 
-                                {{ csrf_field() }}  
-                                <input type="hidden" name="parent_folder" value="{{ $parent_folder->slug }}"/>
-                                  <section class="flexbox">
-                                    <span class="input-find-caption">Имя</span>
-                                    <div class="input-class">
-                                      <input type="text" name="str_find" required value="@if(!empty($str_find)){{$str_find}}@endif"/>
-                                      <button class="btn-sm btn btn-primary my-btn-find-string" type="submit" name="button"></button>
-                                    </div>
-                                  </section>
-                                </form>
-                            </div> <!-- поиск по файлам и папкам --> 
+                            <div class="my-wrap-find-string"> 
+                              <span>Имя</span>
+                            </div> 
                           </th>
                           <th class="d-none d-md-table-cell">Дата создания</th>
                           <th>Размер</th>
@@ -72,7 +33,7 @@
                           @foreach ($children_folder as $fl)
                           <tr>
                             <td >
-                              <a href="{{ route('folder_child',$fl->slug) }}" class="folder-link">  
+                              <a href="{{ route('child',['folder' => $fl->slug, 'group' => $group->slug]) }}" class="folder-link">  
                                 <div class="folder-container" >
                                   @if( ($fl->root_mount === 0) && ( $fl->public_folder === 0 ) )
                                     <div class="folder modile-icons" title="Локальная папка"></div>
@@ -101,24 +62,6 @@
                             <td class="d-none d-md-table-cell">{{ \Carbon\Carbon::parse($fl->created_at)->format('d.m.Y') }} </td>
                             <td></td>
                             <td> <!-- действия для папок -->
-                              <form class="" action="{{ route('folder_delete',$fl->slug) }}" method="post" onsubmit="if(confirm('Удалить?')){return true}else{return false}">
-                                <input type="hidden" name="_method" value="DELETE">
-                                  {{ csrf_field() }}
-                                <button type="submit" class="my-submit-btn">
-                                  <div class="icon-folder-delete modile-icons" title="Удалить папку"></div>
-                                </button>
-                                <a href="{{ route('folder_edit',$fl->slug) }}">  
-                                    <div class="folder-edit modile-icons" title="Переименовать папку"></div>  
-                                </a>
-                                <a href="{{ route('folder_list_group',$fl->slug) }}">  
-                                    <div class="folder-share modile-icons" title="Опубликовать папку"></div>  
-                                </a>
-                                @if( ($fl->root_mount === 1) && ( $fl->public_folder === 1 ) )
-                                  <a href="{{ route('folder_un_list_group',$fl->slug) }}">  
-                                      <div class="folder-close modile-icons" title="Отписать папку"></div>  
-                                  </a>
-                                @endif
-                              </form>
                             </td> 
                           </tr>
                           @endforeach
@@ -160,22 +103,9 @@
                               @endif
                             </td>
                             <td> <!-- действия для файлов -->
-                            <form class="" action="{{ route('delete_basket',$fl->slug) }}" method="post" onsubmit="if(confirm('Удалить?')){return true}else{return false}">
-                                <input type="hidden" name="_method" value="DELETE">
-                                 {{ csrf_field() }}
-                                <a href="{{ route('master_download',$fl->slug) }}">  
-                                    <div class="download-file modile-icons" title="Скачать"></div>  
-                                </a>
-                                <a href="{{ route('share',$fl->slug) }}">  
-                                    <div class="share-file modile-icons" title="Поделиться"></div>  
-                                </a>
-                                <a href="{{ route('file_close',$fl->slug) }}">  
-                                    <div class="close-file modile-icons" title="Закрыть доступ"></div>  
-                                </a>
-                                <button type="submit" class="my-submit-btn">
-                                  <div class="icon-file-delete modile-icons" title="Удалить файл"></div>
-                                </button>
-                             </form>   
+                              <a href="{{ route('gr_master_download',['file' => $fl->slug, 'group' => $group->slug]) }}">  
+                                <div class="download-file modile-icons" title="Скачать"></div>  
+                              </a>
                             </td> 
                           </tr>
                           @endforeach
@@ -208,21 +138,16 @@
 
 @section('nav-link')
 <li class="nav-item menu-logo">
-  <a class="nav-link" href="{{ route('folder_create',$parent_folder) }}"  role="button">
-    <div class="menu-create-folder" title="Создать папку"></div>
-  </a>
-</li>
-<li class="nav-item menu-logo">
-  <a class="nav-link" href="{{ route('file_upload',$parent_folder) }}" role="button">
-    <div class="menu-upload-files" title="Загрузить файл"></div>
+  <a class="nav-link"  href="{{ route('group_open',$group->slug) }}" role="button">
+    <div class="menu-group-home" title="Содержимое группы"></div>
   </a>
 </li>
 <li class="nav-item menu-logo">
   <a class="nav-link"
-  @if ($parent_folder->root === 0)
-   href="{{ route('folder_parent',$parent_folder) }}" 
+  @if ($parent_folder->root_mount === 0)
+   href="{{ route('group_parent',['folder' =>$parent_folder->slug, 'group' => $group->slug]) }}" 
   @else
-    href="{{ route('root_folder') }}"
+    href="{{ route('group_open',$group->slug) }}"
   @endif
    role="button"> 
     <div class="menu-folder-up" title="Вверх"></div>
@@ -230,12 +155,7 @@
 </li>
 <li class="nav-item menu-logo">
   <a class="nav-link"  href="{{ route('root_folder') }}" role="button">
-    <div class="menu-folder-home" title="Корневой каталог"></div>
-  </a>
-</li>
-<li class="nav-item menu-logo">
-  <a class="nav-link" href="{{ route('basket') }}" role="button">
-    <div class="menu-trash" title="Корзина"></div>
+    <div class="menu-folder-home" title="Главное окно"></div>
   </a>
 </li>
 <li class="nav-item menu-logo">
