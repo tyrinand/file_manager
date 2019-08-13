@@ -1,10 +1,10 @@
-#Cloud file storage
+#Cloud file storage#
 
-###Back-end Laravel 5 
+###Back-end Laravel 5 ###
 
-###Front-end Vue.js (components), Bootstrap 
+###Front-end Vue.js (components), Bootstrap ###
 
-###For autization used Active Directory server and LDAP protocol
+###For autization used Active Directory server and LDAP protocol###
 
 [Models](https://github.com/tyrinand/file_manager/tree/master/app)
 
